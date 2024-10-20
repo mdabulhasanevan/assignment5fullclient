@@ -11,70 +11,106 @@ import Categories from '../pages/Categories ';
 import ProductListCategoryWise from '../pages/ProductListCategoryWise';
 import ProductDetails from '../pages/ProductDetails';
 import Contact from '../pages/Contact';
+import AddCategory from '../pages/Admin/category/AddCategory';
+import DashboardLayout from './../layouts/DashboardLayout';
+import CategoryList from '../pages/Admin/category/CategoryList';
+import Dashboard from '../pages/Admin/Dashboard';
 
 
-  const router=createBrowserRouter([
+const router = createBrowserRouter([
     {
-        path:"/",
-        element:<PublicLayout/>,
-        children:[
+        path: "/",
+        element: <PublicLayout />,
+        children: [
             {
-                path:"/",
-                element:<Home/>,
+                path: "/",
+                element: <Home />,
+                loader: () => fetch(`http://localhost:5000/getCategory`),
+
+            },
+            {
+                path: "/product",
+                element: <ProductList />,
                 loader: () => fetch(`https://assignment-4-online-course-project-server-side.vercel.app/course/`),
 
             },
             {
-                path:"/product",
-                element:<ProductList/>,
-                loader: () => fetch(`https://assignment-4-online-course-project-server-side.vercel.app/course/`),
-
-            },
-            {
-                path:"/productdetails/:id",
-                element:<ProductDetails/>,
+                path: "/productdetails/:id",
+                element: <ProductDetails />,
                 loader: ({ params }) => fetch(`https://assignment-4-online-course-project-server-side.vercel.app/course/${params.id}`),
 
             },
             {
-                path:"/category",
-                element:<Categories/>,
-                loader: () => fetch(`https://assignment-4-online-course-project-server-side.vercel.app/course/`),
+                path: "/category",
+                element: <Categories />,
+                loader: () => fetch(`http://localhost:5000/getCategory`),
 
             },
             {
-                path:"/productlistbycategory/:id",
-                element:<ProductListCategoryWise/>,
+                path: "/productlistbycategory/:id",
+                element: <ProductListCategoryWise />,
                 //loader: ({ params }) => fetch(`https://assignment-4-online-course-project-server-side.vercel.app/course/${params.id}`),
                 loader: () => fetch(`https://assignment-4-online-course-project-server-side.vercel.app/course/`),
 
             },
             {
-                path:"/contact",
-                element:<Contact/>
+                path: "/contact",
+                element: <Contact />
             },
             {
-                path:"/about",
-                element:(
+                path: "/about",
+                element: (
                     <PrivateRoute>
-                        <About/>
+                        <About />
                     </PrivateRoute>
                 )
             },
-            
+
+
         ]
     },
     {
-        path:"",
-        element:<LoginLayout/>,
-        children:[
+        path: '',
+        element: <DashboardLayout />,
+        children: [
             {
-                path:"/login",
-                element:<Login/>
+                path: "/dashboard",
+                element: (
+                    <PrivateRoute>
+                        <Dashboard />
+                    </PrivateRoute>
+                )
+            },
+            {
+                path: "/addcategory",
+                element: (
+                    <PrivateRoute>
+                        <AddCategory />
+                    </PrivateRoute>
+                )
+            },
+            {
+                path: "/categorylist",
+                element: (
+                    <PrivateRoute>
+                        <CategoryList />
+                    </PrivateRoute>
+                ),
+                loader: () => fetch(`http://localhost:5000/getcategory`),
+            },
+        ]
+    },
+    {
+        path: "",
+        element: <LoginLayout />,
+        children: [
+            {
+                path: "/login",
+                element: <Login />
             },
         ]
     }
-  ]);
-  
-  export default router;
+]);
+
+export default router;
 

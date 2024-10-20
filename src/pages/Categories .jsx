@@ -19,12 +19,12 @@ const Categories  = () => {
                             <div key={Category._id} className="card bg-base-100 shadow-xl">
                                 <figure>
                                     <img className="w-screen h-60"
-                                        src={Category.img_url}
+                                        src={Category.photo}
                                         alt="Shoes" />
                                 </figure>
                                 <div className="card-body">
                                     <h2 className="card-title">
-                                        {Category.title}
+                                        {Category.name}
                                         <div className="badge badge-secondary"> {Category.ratings}</div>
                                     </h2>
                                     <p>Lession:  {Category.lession}- Duration: {Category.duration}</p>
