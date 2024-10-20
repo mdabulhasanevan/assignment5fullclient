@@ -5,6 +5,11 @@ import Home from '../pages/Home';
 import About from '../pages/About';
 import Login from '../pages/LOgin';
 import LoginLayout from '../layouts/LoginLayout';
+import PrivateRoute from './PrivateRoute';
+import ProductList from '../pages/ProductList';
+import Categories from '../pages/Categories ';
+import ProductListCategoryWise from '../pages/ProductListCategoryWise';
+import ProductDetails from '../pages/ProductDetails';
 
 
   const router=createBrowserRouter([
@@ -14,11 +19,42 @@ import LoginLayout from '../layouts/LoginLayout';
         children:[
             {
                 path:"/",
-                element:<Home/>
+                element:<Home/>,
+                loader: () => fetch(`https://assignment-4-online-course-project-server-side.vercel.app/course/`),
+
+            },
+            {
+                path:"/product",
+                element:<ProductList/>,
+                loader: () => fetch(`https://assignment-4-online-course-project-server-side.vercel.app/course/`),
+
+            },
+            {
+                path:"/productdetails/:id",
+                element:<ProductDetails/>,
+                loader: ({ params }) => fetch(`https://assignment-4-online-course-project-server-side.vercel.app/course/${params.id}`),
+
+            },
+            {
+                path:"/category",
+                element:<Categories/>,
+                loader: () => fetch(`https://assignment-4-online-course-project-server-side.vercel.app/course/`),
+
+            },
+            {
+                path:"/productlistbycategory/:id",
+                element:<ProductListCategoryWise/>,
+                //loader: ({ params }) => fetch(`https://assignment-4-online-course-project-server-side.vercel.app/course/${params.id}`),
+                loader: () => fetch(`https://assignment-4-online-course-project-server-side.vercel.app/course/`),
+
             },
             {
                 path:"/about",
-                element:<About/>
+                element:(
+                    <PrivateRoute>
+                        <About/>
+                    </PrivateRoute>
+                )
             },
             
         ]

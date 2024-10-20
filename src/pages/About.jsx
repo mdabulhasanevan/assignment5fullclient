@@ -1,7 +1,11 @@
 
+
 import { Helmet } from 'react-helmet';
 
+
 const About = () => {
+    
+
     return (
         <div>
             <Helmet>

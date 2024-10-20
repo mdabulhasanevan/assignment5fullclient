@@ -1,20 +1,16 @@
 import { Helmet } from "react-helmet";
 import { Link, useLoaderData } from "react-router-dom";
-import Faq from "../components/Faq";
-import Slider from "../components/slider";
-import ProductFeaturesBestProduct from "../components/ProductFeaturesBestProduct";
 
 
-const Home = () => {
+const Categories  = () => {
     const Categories = useLoaderData();
     console.log(Categories);
     return (
         <div>
-            <Helmet>
-                <title>Home | Page</title>
+             <Helmet>
+                <title>Category List</title>
             </Helmet>
-            <Slider/>
-            <div className="p-3">
+           <div className="p-3">
                 <h2 className="font-bold text-center p-3">Our Categories {Categories.length}</h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
                     {
@@ -48,10 +44,8 @@ const Home = () => {
                 </div>
 
             </div>
-            <ProductFeaturesBestProduct/>
-            <Faq/>
         </div>
     );
 };
 
-export default Home;
+export default Categories ;
