@@ -10,6 +10,7 @@ import ProductList from '../pages/ProductList';
 import Categories from '../pages/Categories ';
 import ProductListCategoryWise from '../pages/ProductListCategoryWise';
 import ProductDetails from '../pages/ProductDetails';
+import Contact from '../pages/Contact';
 
 
   const router=createBrowserRouter([
@@ -47,6 +48,10 @@ import ProductDetails from '../pages/ProductDetails';
                 //loader: ({ params }) => fetch(`https://assignment-4-online-course-project-server-side.vercel.app/course/${params.id}`),
                 loader: () => fetch(`https://assignment-4-online-course-project-server-side.vercel.app/course/`),
 
+            },
+            {
+                path:"/contact",
+                element:<Contact/>
             },
             {
                 path:"/about",
