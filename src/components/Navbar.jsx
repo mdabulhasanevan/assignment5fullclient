@@ -55,6 +55,7 @@ const Navbar = () => {
             <>
               <div className="flex items-center gap-2">
                 {/* <img src={`${user?.photoURL}`} /> */}
+                <Link to="/dashboard">Dashboard</Link>
                 <img src={user?.photoURL} className="w-7 rounded-full" />
                 <span>{user?.displayName}</span>
                 <button onClick={handleLogout} className="btn">

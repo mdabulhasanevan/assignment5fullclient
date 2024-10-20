@@ -16,6 +16,8 @@ import DashboardLayout from './../layouts/DashboardLayout';
 import CategoryList from '../pages/Admin/category/CategoryList';
 import Dashboard from '../pages/Admin/Dashboard';
 
+import EditCategory from './../pages/Admin/category/EditCategory';
+
 
 const router = createBrowserRouter([
     {
@@ -97,6 +99,15 @@ const router = createBrowserRouter([
                     </PrivateRoute>
                 ),
                 loader: () => fetch(`http://localhost:5000/getcategory`),
+            },
+            {
+                path: "/editcategory/:id",
+                element: (
+                    <PrivateRoute>
+                        <EditCategory />
+                    </PrivateRoute>
+                ),
+                loader: ({ params }) => fetch(`http://localhost:5000/categoryadmin/${params.id}`),
             },
         ]
     },

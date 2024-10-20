@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 import { Link, useLoaderData } from 'react-router-dom';
-import { toast } from 'react-toastify';
+
 
 const CategoryList = () => {
     const loadedUsers = useLoaderData();
@@ -81,7 +82,7 @@ const CategoryList = () => {
                   <span className="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">
                     Actions
                   </span>
-                  <Link to={`/edit/${user._id}`}>
+                  <Link to={`/editcategory/${user._id}`}>
                     <button
                       className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 
             border border-blue-500 hover:border-transparent rounded-none"

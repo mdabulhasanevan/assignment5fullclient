@@ -1,5 +1,6 @@
+import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
+
 
 
 const AddCategory = () => {
