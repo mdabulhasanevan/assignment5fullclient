@@ -52,7 +52,7 @@ const ProductListAdmin = () => {
                  Name
               </th>
               <th className="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">
-                Photo
+                Others
               </th>
   
               <th className="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">
@@ -85,7 +85,9 @@ const ProductListAdmin = () => {
                     {" "}
                     photo
                   </span>
-                  {user.photo}
+                 <span className='font-bold'>Rating:</span>  {user.rating} <br></br>
+                 <span className='font-bold'>Price: </span>  {user.price} <br></br>
+                 <span className='font-bold'>description:</span>   {user.discription} <br></br>
                 </td>
   
                 <td className="w-full lg:w-auto p-3 text-gray-800 border border-b text-center block lg:table-cell relative lg:static">

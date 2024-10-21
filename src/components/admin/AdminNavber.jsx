@@ -32,6 +32,7 @@ const AdminNavber = () => {
                             tabIndex={0}
                             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
                             <li><Link to="/dashboard">Dashboard</Link></li>
+                            <li><Link to="/categorylist">User</Link></li>
                             <li><Link to="/categorylist">Category</Link></li>
                             <li><Link to="/productlistadmin">Product</Link></li>
                         </ul>
@@ -43,6 +44,7 @@ const AdminNavber = () => {
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
                         <li><Link to="/dashboard">Dashboard</Link></li>
+                        <li><Link to="/categorylist">User</Link></li>
                         <li><Link to="/categorylist">Category</Link></li>
                         <li><Link to="/productlistadmin">Product</Link></li>
 

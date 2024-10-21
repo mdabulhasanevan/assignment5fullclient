@@ -11,8 +11,8 @@ const Categories  = () => {
                 <title>Category List</title>
             </Helmet>
            <div className="p-3">
-                <h2 className="font-bold text-center p-3">Our Categories {Categories.length}</h2>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+                <h2 className="font-bold text-center p-3">Product's Categories- {Categories.length}</h2>
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-2">
                     {
                         Categories.map((Category) => (
 
@@ -25,13 +25,9 @@ const Categories  = () => {
                                 <div className="card-body">
                                     <h2 className="card-title">
                                         {Category.name}
-                                        <div className="badge badge-secondary"> {Category.ratings}</div>
+                                        <div className="badge badge-secondary"> 5/5</div>
                                     </h2>
-                                    <p>Lession:  {Category.lession}- Duration: {Category.duration}</p>
-                                    <div className="card-actions justify-end">
-                                        <div className="badge badge-outline"> {Category.level}</div>
-                                        <div className="badge badge-outline"> {Category.author}</div>
-                                    </div>
+                                   
                                     <div className="card-actions justify-end">
                                         <Link to={`/productlistbycategory/${Category._id}`}><button className="btn btn-sm btn-primary">View Products</button> </Link>
                                     </div>

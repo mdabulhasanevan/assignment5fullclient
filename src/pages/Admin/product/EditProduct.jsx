@@ -24,7 +24,7 @@ const EditProduct = () => {
       });
   }, []);
 
-  const [selectedCategory, setSelectedCategory] = useState(category?.name || "");
+ // const [selectedCategory, setSelectedCategory] = useState(category?.name || "");
 
 
   //console.log(loadedUser);
@@ -38,8 +38,11 @@ const EditProduct = () => {
     const name = form.get("name");
     const photo = form.get("photo");
     const category = form.get("category");
+    const discription = form.get("discription");
+    const rating = form.get("rating");
+    const price = form.get("price");
 
-    const updatedUser = { category, name, photo };
+    const updatedUser = { category, name, photo, discription, rating, price  };
     console.log("UpdatedUser:", updatedUser);
 
     fetch(`http://localhost:5000/productedit/${loadedUser._id}`, {
@@ -95,7 +98,7 @@ const EditProduct = () => {
                   leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
               id="category"
               type="text"
-              name="category"  defaultValue={selectedCategory}
+              name="category"  
               onChange={(e) => setSelectedCategory(e.target.value)}>
               <option value="">Select</option>
               {category.map((category) => (
@@ -128,6 +131,70 @@ const EditProduct = () => {
               type="text"
               name="name"
               defaultValue={loadedUser.name}
+            />
+          </div>
+        </div>
+
+        
+        <div className="md:flex md:items-center mb-6">
+          <div className="md:w-1/3">
+            <label
+              className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
+              htmlFor="name"
+            >
+               discription
+            </label>
+          </div>
+          <div className="md:w-1/3">
+            <input
+              className="bg-gray-200 appearance-none border-2 border-gray-200 rounded-none w-full py-2 px-4 text-gray-700 
+        leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+              id="discription"
+              type="text"
+              name="discription"
+              defaultValue={loadedUser.discription}
+            />
+          </div>
+        </div>
+
+        <div className="md:flex md:items-center mb-6">
+          <div className="md:w-1/3">
+            <label
+              className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
+              htmlFor="name"
+            >
+               Price
+            </label>
+          </div>
+          <div className="md:w-1/3">
+            <input
+              className="bg-gray-200 appearance-none border-2 border-gray-200 rounded-none w-full py-2 px-4 text-gray-700 
+        leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+              id="price"
+              type="text"
+              name="price"
+              defaultValue={loadedUser.price}
+            />
+          </div>
+        </div>
+
+        <div className="md:flex md:items-center mb-6">
+          <div className="md:w-1/3">
+            <label
+              className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
+              htmlFor="name"
+            >
+               Rating
+            </label>
+          </div>
+          <div className="md:w-1/3">
+            <input
+              className="bg-gray-200 appearance-none border-2 border-gray-200 rounded-none w-full py-2 px-4 text-gray-700 
+        leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+              id="rating"
+              type="text"
+              name="rating"
+              defaultValue={loadedUser.rating}
             />
           </div>
         </div>

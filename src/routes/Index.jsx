@@ -20,6 +20,7 @@ import EditCategory from './../pages/Admin/category/EditCategory';
 import AddProduct from '../pages/Admin/product/AddProduct';
 import EditProduct from '../pages/Admin/product/EditProduct';
 import ProductListAdmin from '../pages/Admin/product/ProductListAdmin';
+import SingUp from './../pages/Admin/SignUp';
 
 
 
@@ -43,7 +44,7 @@ const router = createBrowserRouter([
             {
                 path: "/productdetails/:id",
                 element: <ProductDetails />,
-                loader: ({ params }) => fetch(`https://assignment-4-online-course-project-server-side.vercel.app/course/${params.id}`),
+                loader: ({ params }) => fetch(`http://localhost:5000/productdetail/${params.id}`),
 
             },
             {
@@ -56,7 +57,7 @@ const router = createBrowserRouter([
                 path: "/productlistbycategory/:id",
                 element: <ProductListCategoryWise />,
                 //loader: ({ params }) => fetch(`https://assignment-4-online-course-project-server-side.vercel.app/course/${params.id}`),
-                loader: () => fetch(`https://assignment-4-online-course-project-server-side.vercel.app/course/`),
+                loader: ({ params }) => fetch(`http://localhost:5000/productlistbycategory/${params.id}`),
 
             },
             {
@@ -153,6 +154,10 @@ const router = createBrowserRouter([
             {
                 path: "/login",
                 element: <Login />
+            },
+            {
+                path: "/singup",
+                element: <SingUp />
             },
         ]
     }

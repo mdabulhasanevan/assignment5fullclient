@@ -1,6 +1,7 @@
 import { GoogleAuthProvider, getAuth, onAuthStateChanged, signInWithPopup, signOut } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import app from "../../public/firebase/firebase.config";
+import { Navigate } from "react-router-dom";
 
 export const AuthContextLogin = createContext(null);
 
@@ -17,6 +18,7 @@ const AuthProvider = ({ children }) => {
 
     const logOutUser = () => {
         return signOut(auth);
+       
     };
 
     useEffect(() => {

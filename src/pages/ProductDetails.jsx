@@ -4,36 +4,34 @@ import { AuthContextLogin } from "../provider/AuthProvider";
 
 
 const ProductDetails = () => {
-    const courseDetails = useLoaderData();
+    const productDetails = useLoaderData();
     //const { id } = useParams();
     // console.log(id);
-    console.log(courseDetails);
+    console.log(productDetails);
     const { user } = useContext(AuthContextLogin);
-    //const { title, image_url, rating, details, category_id } = courseDetails;
+    //const { title, image_url, rating, details, category_id } = productDetails;
     return (
         <div>
             <div className="card bg-base-100  shadow-xl">
                 <figure className=''>
                     <img className=' '
-                        src={courseDetails.img_url}
+                        src={productDetails.photo}
                         alt="Shoes" />
 
                 </figure>
                 <div className="p-10 grid grid-cols-1 md:grid-cols-2">
                     <div className=''>
-                        <h2 className="card-title">{courseDetails.title}</h2>
-                        <p><span className='text-center font-bold'>author:     </span>{courseDetails.author}</p>
-                        <p>{courseDetails.details}</p>
+                        <h2 className="card-title">{productDetails.name}</h2>
+                        <p><span className='text-center font-bold'>category:     </span>{productDetails.category}</p>
+                        <p>{productDetails.discription}</p>
                         <hr></hr>
-                        <p><span className='font-bold'>lession:    </span>{courseDetails.lession}</p>
-                        <p><span className='font-bold'>student:    </span>{courseDetails.student}</p>
-                        <p><span className='font-bold'>duration:   </span>{courseDetails.duration}</p>
-                        <p><span className='font-bold'>price:      </span>{courseDetails.price}</p>
-                        <p><span className='font-bold'>assessments:</span>{courseDetails.assessments}</p>
+                        <p><span className='font-bold'>rating:    </span>{productDetails.rating}</p>
+                      
+                        <p><span className='font-bold'>price:      </span>{productDetails.price}</p>
+                      
 
-
-                        <p><span className='font-bold'>level:      </span>{courseDetails.level}</p>
-                        <p><span className='font-bold'>ratings:    </span>{courseDetails.ratings}</p>
+                       
+                        <p><span className='font-bold'>ratings:    </span>{productDetails.rating}</p>
 
                         <div className="rating">
                             <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" />
@@ -47,14 +45,11 @@ const ProductDetails = () => {
                             <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400" />
                         </div>
 
-                        <p><span className='font-bold'>assessments:</span>{courseDetails.assessments}</p>
-
+                        
 
                     </div>
                     <div >
-                        <div className='flex items-center justify-center '>
-                            <img className=' w-10/12 rounded-full' src={courseDetails.author_img_url} alt="author_img_url" />
-                        </div>
+                       
 
 
                         <div className="card-actions justify-end">
@@ -81,7 +76,7 @@ const ProductDetails = () => {
                                 <div className="">
                                     {/* <img src={`${user?.photoURL}`} /> */}
                                     <h1 className="font-bold">Product</h1>
-                                    <h1>Product Name: {courseDetails.title}</h1>
+                                    <h1>Product Name: {productDetails.name}</h1>
                                     <div className="form-control w-40">
                                         <label className="label cursor-pointer">
                                             <span className="label-text">Is For Gift</span>
@@ -99,7 +94,7 @@ const ProductDetails = () => {
                                     <br></br>
                                     <hr></hr>
                                     <h1 className="font-bold">Customer Detail</h1>
-                                    <img src={user?.photoURL} className="w-7 rounded-full" />
+                                    <img src={user?.photo} className="w-7 rounded-full" />
                                     <span className="font-bold">{user?.displayName}</span>
                                     <p>Mobile:{user?.mobile}</p>
                                     <p>Email:{user?.email}</p>

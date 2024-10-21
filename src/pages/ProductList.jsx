@@ -25,12 +25,12 @@ const ProductList = () => {
                                 <div className="card-body">
                                     <h2 className="card-title">
                                         {ProductList.name}
-                                        <div className="badge badge-secondary"> {ProductList.ratings}</div>
+                                        <div className="badge badge-secondary"> {ProductList.rating}</div>
                                     </h2>
-                                    <p>Lession:  {ProductList.lession}- Duration: {ProductList.duration}</p>
+                                    <p>Price:  {ProductList.price}-<br></br> Description: {ProductList.discription}</p>
                                     <div className="card-actions justify-end">
-                                        <div className="badge badge-outline"> {ProductList.level}</div>
-                                        <div className="badge badge-outline"> {ProductList.author}</div>
+                                        <div className="badge badge-outline"> {ProductList.price}</div>
+                                        <div className="badge badge-outline"> {ProductList.category}</div>
                                     </div>
                                     <div className="card-actions justify-end">
                                         <Link to={`/productdetails/${ProductList._id}`}><button className="btn btn-sm btn-primary">View Products</button> </Link>
