@@ -39,7 +39,7 @@ const Navbar = () => {
             </ul>
           </div>
           <Link to="/" className="btn bg-white hover:bg-white text-xl">BuyMe
-          <img src="\src\assets\logo.jpg" className="w-14"/>
+          <img src="\src\assets\logo.jpg" className="hidden sm:block w-14"/>
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
@@ -53,11 +53,11 @@ const Navbar = () => {
         <div className="navbar-end">
           {user ? (
             <>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 ">
                 {/* <img src={`${user?.photoURL}`} /> */}
-                <Link to="/dashboard">Dashboard</Link>
-                <img src={user?.photoURL} className="w-7 rounded-full" />
-                <span>{user?.displayName}</span>
+                
+                <img src={user?.photoURL} className="w-7 rounded-full " />
+                <Link to="/dashboard"> <span>{user?.displayName}</span></Link>
                 <button onClick={handleLogout} className="btn">
                   Logout
                 </button>
