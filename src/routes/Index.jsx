@@ -17,6 +17,10 @@ import CategoryList from '../pages/Admin/category/CategoryList';
 import Dashboard from '../pages/Admin/Dashboard';
 
 import EditCategory from './../pages/Admin/category/EditCategory';
+import AddProduct from '../pages/Admin/product/AddProduct';
+import EditProduct from '../pages/Admin/product/EditProduct';
+import ProductListAdmin from '../pages/Admin/product/ProductListAdmin';
+
 
 
 const router = createBrowserRouter([
@@ -33,7 +37,7 @@ const router = createBrowserRouter([
             {
                 path: "/product",
                 element: <ProductList />,
-                loader: () => fetch(`https://assignment-4-online-course-project-server-side.vercel.app/course/`),
+                loader: () => fetch(`http://localhost:5000/getproduct`),
 
             },
             {
@@ -109,6 +113,37 @@ const router = createBrowserRouter([
                 ),
                 loader: ({ params }) => fetch(`http://localhost:5000/categoryadmin/${params.id}`),
             },
+
+            //product router
+            
+            {
+                path: "/addproduct",
+                element: (
+                    <PrivateRoute>
+                        <AddProduct />
+                    </PrivateRoute>
+                ),
+                loader: () => fetch(`http://localhost:5000/getcategory`),
+            },
+            {
+                path: "/productlistadmin",
+                element: (
+                    <PrivateRoute>
+                        <ProductListAdmin/>
+                    </PrivateRoute>
+                ),
+                loader: () => fetch(`http://localhost:5000/getproduct`),
+            },
+            {
+                path: "/editproduct/:id",
+                element: (
+                    <PrivateRoute>
+                        <EditProduct />
+                    </PrivateRoute>
+                ),
+                loader: ({ params }) => fetch(`http://localhost:5000/productadmin/${params.id}`)
+            },
+
         ]
     },
     {

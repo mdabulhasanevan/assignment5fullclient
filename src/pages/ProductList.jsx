@@ -19,12 +19,12 @@ const ProductList = () => {
                             <div key={ProductList._id} className="card bg-base-100 shadow-xl">
                                 <figure>
                                     <img className="w-screen h-60"
-                                        src={ProductList.img_url}
+                                        src={ProductList.photo}
                                         alt="Shoes" />
                                 </figure>
                                 <div className="card-body">
                                     <h2 className="card-title">
-                                        {ProductList.title}
+                                        {ProductList.name}
                                         <div className="badge badge-secondary"> {ProductList.ratings}</div>
                                     </h2>
                                     <p>Lession:  {ProductList.lession}- Duration: {ProductList.duration}</p>
