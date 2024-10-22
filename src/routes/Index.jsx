@@ -20,7 +20,14 @@ import EditCategory from './../pages/Admin/category/EditCategory';
 import AddProduct from '../pages/Admin/product/AddProduct';
 import EditProduct from '../pages/Admin/product/EditProduct';
 import ProductListAdmin from '../pages/Admin/product/ProductListAdmin';
-import SingUp from './../pages/Admin/SignUp';
+
+import RegisterPage from '../pages/RegisterPage';
+import AllUsers from '../pages/Admin/AllUsers';
+import MessageDetails from '../pages/Admin/MessageDetails';
+import Messages from '../pages/Admin/Messages';
+import Profile from '../pages/Admin/Profile';
+import CreateMessage from '../pages/Admin/CreateMessages';
+
 
 
 
@@ -72,8 +79,6 @@ const router = createBrowserRouter([
                     </PrivateRoute>
                 )
             },
-
-
         ]
     },
     {
@@ -114,6 +119,31 @@ const router = createBrowserRouter([
                 ),
                 loader: ({ params }) => fetch(`http://localhost:5000/categoryadmin/${params.id}`),
             },
+
+            {
+                path: "",
+                element: <Profile />,
+              },
+              {
+                path: "allUsers",
+                element: <AllUsers />,
+              },
+              {
+                path: "profile",
+                element: <Profile />,
+              },
+              {
+                path: "messages",
+                element: <Messages />,
+              },
+              {
+                path: "messages/:id",
+                element: <MessageDetails />,
+              },
+              {
+                path: "createMessage",
+                element: <CreateMessage />,
+              },
 
             //product router
             
@@ -156,8 +186,8 @@ const router = createBrowserRouter([
                 element: <Login />
             },
             {
-                path: "/singup",
-                element: <SingUp />
+              path: "/register",
+              element: <RegisterPage />,
             },
         ]
     }

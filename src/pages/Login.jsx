@@ -1,109 +1,97 @@
 import { useContext, useState } from "react";
 import { AuthContextLogin } from './../provider/AuthProvider';
 import { Link, useNavigate } from "react-router-dom";
-import { getAuth, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
-import app from "../../public/firebase/firebase.config";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+//import { getAuth, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
+//import app from "../../public/firebase/firebase.config";
 
 
-const Login = () => {
-    const auth = getAuth(app);
-    const navigate=useNavigate();
-    const {loginWithGoogle} = useContext(AuthContextLogin);
+const Login = () => {const { loginWithEmail } = useContext(AuthContextLogin);
+const navigate = useNavigate();
+const [email, setEmail] = useState("");
+const [password, setPassword] = useState("");
+const [showPassword, setShowPassword] = useState(false);
+const [error, setError] = useState(null); // State to handle error messages
 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [err, setErr] = useState("");
-  
-    const handleSubmit = () => {
-      if (!email && !password) {
-        setErr("Fill the all details!");
-      } else if (!email) {
-        setErr("Enter your email!");
-      } else if (!password) {
-        setErr("Enter your password!");
-      } else if (password.length < 7) {
-        setErr("Password need minimum 8 character!");
-      } else {
-        signInWithEmailAndPassword(auth, email, password)
-          .then((userCredential) => {
-            // Signed in
-            setErr("");
-            console.log(userCredential);
-            navigate("/dashboard");
-          })
-          .catch((error) => {
-            console.log(error.code);
-            if (error.code == "auth/wrong-password") {
-              setErr("Wrong password!");
-            } else if (error.code == "auth/user-not-found") {
-              setErr("Wrong email!");
-            } else {
-              setErr("");
-            }
-          });
-      }
-    };
+const handleEmailLogin = async (e) => {
+  e.preventDefault();
+  setError(null); // Reset any previous errors
 
-    onAuthStateChanged(auth, (user) => {
-        if (user) {
-          navigate("/dashboard");
-        }
-      });
+  try {
+    await loginWithEmail(email, password); // Try to log in
+    navigate("/dashboard"); // If successful, navigate to dashboard
+  } catch (err) {
+    setError(err.message); // Set error message if login fails
+    console.error(err.message);
+  }
+};
 
+return (
+  <div className="hero min-h-screen bg-white pt-10 font-semibold">
+    <div className="card w-full max-w-xl ">
+      <form className="card-body" onSubmit={handleEmailLogin}>
+        <h1 className="text-4xl font-extrabold text-center mb-4">
+          Please Login!
+        </h1>
 
-    const handelGoogleLogin = () => {
+        {/* Display error message */}
+        {error && <p className="text-red-500 text-center">{error}</p>}
 
-        loginWithGoogle()
-        .then((res)=>{
-            console.log(res);
-            navigate("/dashboard");
-        })
-        .catch((error)=>{
-            console.log(error);
-        });
-        // console.log("cssdsds")
-    }
-
-    return (
-        <div>
-      <div className="hero bg-base-200 ">
-        <div className="">
-
-          <div className="card bg-base-100   shadow-2xl">
-          <div className="card-body w-auto"> 
-            <h1 className="font-bold text-center">Login</h1>
-            <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Email</span>
-                </label>
-                <input onChange={(e) => setEmail(e.target.value)} type="email" placeholder="Enter your email" className="input input-bordered" required />
-              </div>
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Password</span>
-                </label>
-                <input onChange={(e) => setPassword(e.target.value)} type="password" placeholder="Enter your password" className="input input-bordered" required />
-                <p>{err}</p>
-                <label className="label">
-                  <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
-                </label>
-              </div>
-              <div className="form-control mt-6">
-                <button onClick={handleSubmit} className="btn btn-primary">Login</button>
-                <Link  to="/singup" className="text-blue-700">You have don't account? Singup</Link>
-              </div>
-              <div className="form-control mt-6">
-                <button onClick={handelGoogleLogin} className="btn btn-success">Login with Google</button>
-<br></br>
-              
-                </div>
-
-              </div> 
-          </div>
+        <div className="form-control">
+          <label className="label">
+            <span className="label-text">Email</span>
+          </label>
+          <input
+            type="email"
+            placeholder="Enter your email"
+            className="input input-bordered"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
         </div>
-      </div>
+
+        <div className="form-control">
+          <label className="label">
+            <span className="label-text">Password</span>
+          </label>
+          <div className="relative">
+            <input
+              type={showPassword ? "text" : "password"}
+              placeholder="Enter your password"
+              className="input input-bordered w-full pr-10"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            <span
+              className="absolute right-3 top-3 cursor-pointer"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <AiFillEyeInvisible /> : <AiFillEye />}
+            </span>
+          </div>
+          <label className="label">
+            <Link to="#" className="label-text-alt link link-hover">
+              Forgot password?
+            </Link>
+          </label>
+        </div>
+
+        <div className="form-control mt-6">
+          <button className="btn bg-black text-white w-full">Login</button>
+        </div>
+
+        <p className="mt-4 text-center">
+          Don't have an account?{" "}
+          <Link to="/register" className="link">
+            Register here
+          </Link>
+        </p>
+      </form>
     </div>
-    );
+  </div>
+);
 };
 
 export default Login;
