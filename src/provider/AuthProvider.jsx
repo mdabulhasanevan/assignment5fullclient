@@ -7,13 +7,16 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import app from "../../public/firebase/firebase.config";
+import { useNavigate } from "react-router-dom";
 
 export const AuthContextLogin = createContext(null);
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const auth = getAuth(app);
 
+ 
+  const auth = getAuth(app);
+  //const [user, setUser] = useState(null);
   // Login with email
   const loginWithEmail = (email, password) => {
     return signInWithEmailAndPassword(auth, email, password);
@@ -69,10 +72,13 @@ const AuthProvider = ({ children }) => {
   };
 
   // Logout user
-  const logOutUser = () => {
-    return signOut(auth);
-  };
-
+  const logOutUser = async () => {
+    //const navigate = useNavigate(); // Initialize useNavigate
+    await signOut(auth); // Wait for sign out to complete
+    
+    //navigate('/login');
+    
+    }
   // Monitor auth state and fetch user data from backend
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
@@ -103,7 +109,7 @@ const AuthProvider = ({ children }) => {
 
   return (
     <AuthContextLogin.Provider
-      value={{ registerWithEmail, user, loginWithEmail, logOutUser }}
+      value={{ registerWithEmail, setUser, user,  loginWithEmail, logOutUser }}
     >
       {children}
     </AuthContextLogin.Provider>

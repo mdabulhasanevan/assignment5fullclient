@@ -27,11 +27,19 @@ import MessageDetails from '../pages/Admin/MessageDetails';
 import Messages from '../pages/Admin/Messages';
 import Profile from '../pages/Admin/Profile';
 import CreateMessage from '../pages/Admin/CreateMessages';
+import CustomerPurchaseHistory from '../pages/Admin/purchase/CustomerPurchaseHistory';
+import CustomerPurchaseHistorySelf from './../pages/Admin/purchase/CustomerPurchaseHistorySelf';
+import { useContext } from 'react';
+
+
+import React from 'react'
 
 
 
 
 const router = createBrowserRouter([
+   
+    
     {
         path: "/",
         element: <PublicLayout />,
@@ -122,31 +130,54 @@ const router = createBrowserRouter([
 
             {
                 path: "",
-                element: <Profile />,
-              },
-              {
+                element: <PrivateRoute><Profile /></PrivateRoute>,
+            },
+            {
                 path: "allUsers",
-                element: <AllUsers />,
-              },
-              {
+                element:
+                    <PrivateRoute><AllUsers /></PrivateRoute>,
+            },
+            {
                 path: "profile",
-                element: <Profile />,
-              },
-              {
+                element: <PrivateRoute><Profile /></PrivateRoute>,
+            },
+            {
                 path: "messages",
-                element: <Messages />,
-              },
-              {
+                element: <PrivateRoute><Messages /></PrivateRoute>,
+            },
+            {
                 path: "messages/:id",
-                element: <MessageDetails />,
-              },
-              {
+                element: <PrivateRoute><MessageDetails /></PrivateRoute>,
+            },
+            {
                 path: "createMessage",
-                element: <CreateMessage />,
-              },
+                element: <PrivateRoute><CreateMessage /></PrivateRoute>,
+            },
+
+            //product purchase
+
+            {
+                path: "/getcustomerpurchase",
+                element: (
+                    <PrivateRoute>
+                        <CustomerPurchaseHistory />
+                    </PrivateRoute>
+                ),
+                loader: () => fetch(`http://localhost:5000/getCustomerPurchase`),
+            },
+            {
+               
+                path: "/getcustomerpurchaseself/:id",
+                element: (
+                    <PrivateRoute>
+                        <CustomerPurchaseHistorySelf />
+                    </PrivateRoute>
+                ),
+                loader: ({ params }) => (fetch(`http://localhost:5000/CustomerPurchaseHistorySelf/${params.id}`)),
+            },
 
             //product router
-            
+
             {
                 path: "/addproduct",
                 element: (
@@ -160,7 +191,7 @@ const router = createBrowserRouter([
                 path: "/productlistadmin",
                 element: (
                     <PrivateRoute>
-                        <ProductListAdmin/>
+                        <ProductListAdmin />
                     </PrivateRoute>
                 ),
                 loader: () => fetch(`http://localhost:5000/getproduct`),
@@ -186,8 +217,8 @@ const router = createBrowserRouter([
                 element: <Login />
             },
             {
-              path: "/register",
-              element: <RegisterPage />,
+                path: "/register",
+                element: <RegisterPage />,
             },
         ]
     }

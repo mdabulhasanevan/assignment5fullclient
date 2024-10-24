@@ -47,6 +47,16 @@ const DashboardSidebarContent = () => {
           Profile
         </NavLink>
 
+        <NavLink
+         to={`/getcustomerpurchaseself/${user.phone}`}
+          className={({ isActive }) =>
+            isActive ? "text-blue-600" : "text-gray-600 hover:text-blue-500"
+          }
+        >
+          <FaUser className="inline mr-2" />
+          Purchase History
+        </NavLink>
+
         {!user?.isBlocked && (
           <>
             {" "}
@@ -54,7 +64,7 @@ const DashboardSidebarContent = () => {
             {user?.isAdmin && (
               <>
                 <NavLink
-                  to="/dashboard/allUsers"
+                  to="/allUsers"
                   className={({ isActive }) =>
                     isActive
                       ? "text-blue-600"
@@ -65,7 +75,7 @@ const DashboardSidebarContent = () => {
                   All Users
                 </NavLink>
                 <NavLink
-                  to="/dashboard/createMessage"
+                  to="/createMessage"
                   className={({ isActive }) =>
                     isActive
                       ? "text-blue-600"
@@ -80,7 +90,7 @@ const DashboardSidebarContent = () => {
             {/* User Links */}
             {!user?.isAdmin && (
               <NavLink
-                to="/dashboard/messages"
+                to="/messages"
                 className={({ isActive }) =>
                   isActive
                     ? "text-blue-600"

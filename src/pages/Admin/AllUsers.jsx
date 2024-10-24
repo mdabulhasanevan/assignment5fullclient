@@ -20,7 +20,7 @@ const AllUsers = () => {
   const fetchUsers = async () => {
     try {
       const response = await fetch(
-        "https://the-master-full-stack-project-server.vercel.app/users"
+        "http://localhost:5000/users"
       );
       const data = await response.json();
       setUsers(data);
@@ -44,7 +44,7 @@ const AllUsers = () => {
       console.log({ updatedUser });
 
       await fetch(
-        `https://the-master-full-stack-project-server.vercel.app/user/${selectedUser._id}`,
+        `http://localhost:5000/user/${selectedUser._id}`,
         {
           method: "PUT",
           headers: {
@@ -67,7 +67,7 @@ const AllUsers = () => {
       const updatedUser = { ...selectedUser, isAdmin: !selectedUser?.isAdmin };
 
       await fetch(
-        `https://the-master-full-stack-project-server.vercel.app/user/${selectedUser._id}`,
+        `http://localhost:5000/user/${selectedUser._id}`,
         {
           method: "PUT",
           headers: {
@@ -87,7 +87,7 @@ const AllUsers = () => {
   const openEditModal = (user) => {
     setSelectedUser(user);
     setFormData({
-      displayName: user.displayName || "",
+      name: user.displayName || "",
       phone: user.phone || "",
       photoUrl: user.photoUrl || "",
       address: user.address || "",
@@ -107,7 +107,7 @@ const AllUsers = () => {
       };
 
       await fetch(
-        `https://the-master-full-stack-project-server.vercel.app/user/${selectedUser._id}`,
+        `http://localhost:5000/user/${selectedUser._id}`,
         {
           method: "PUT",
           headers: {
@@ -172,12 +172,12 @@ const AllUsers = () => {
                   className={`mr-2 p-2 rounded-full text-white ${
                     user.isAdmin ? "bg-green-500" : "bg-blue-500"
                   } ${
-                    user.email === "super-admin@dev-master.com"
+                    user.email === "admin@gmail.com"
                       ? "opacity-50 cursor-not-allowed"
                       : ""
                   }`}
                   title="Toggle Admin/User"
-                  disabled={user.email === "super-admin@dev-master.com"}
+                  disabled={user.email === "admin@gmail.com"}
                 >
                   <FaUserShield />
                 </button>
@@ -197,7 +197,7 @@ const AllUsers = () => {
                       : ""
                   }`}
                   title="Block User"
-                  disabled={user.email === "super-admin@dev-master.com"}
+                  disabled={user.email === "admin@gmail.com"}
                 >
                   <ImBlocked />
                 </button>
@@ -239,7 +239,7 @@ const AllUsers = () => {
               <input
                 type="text"
                 className="w-full p-2 border rounded"
-                value={formData.photoURL}
+                value={formData.photoUrl}
                 onChange={(e) =>
                   setFormData({ ...formData, photoUrl: e.target.value })
                 }

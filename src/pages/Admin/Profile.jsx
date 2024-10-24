@@ -1,17 +1,21 @@
 import { useContext, useState } from "react";
 import { AuthContextLogin } from "../../provider/AuthProvider";
 import { FiEdit } from "react-icons/fi"; // Importing react-icon
+import toast from "react-hot-toast";
+import { Navigate } from "react-router-dom";
 
 const Profile = () => {
-  const { user } = useContext(AuthContextLogin);
+  const { user, setUser } = useContext(AuthContextLogin);
+ // const { user } = useContext(AuthContextLogin);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  
   const [formData, setFormData] = useState({
     displayName: "",
     phone: "",
     photoURL: "",
     address: "",
   });
-
+console.log(user);
   // Update user info
   const handleUpdate = async () => {
     try {
@@ -25,26 +29,34 @@ const Profile = () => {
 
       // Make API call to update user information
       const response = await fetch(
-        `https://the-master-full-stack-project-server.vercel.app/user/${user._id}`,
+        `http://localhost:5000/user/${user._id}`,
         {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(updatedUser),
-        }
-      );
-
+        })
+        
+       
+         
       if (!response.ok) {
         throw new Error("Failed to update user information");
       }
-
-      // Close the modal upon successful update
+      //const updatedUserData = await response.json();
+      console.log(updatedUser);
+      setUser(updatedUser); // Update user in the context
+      
       setIsEditModalOpen(false);
+     //
+    
+      // Close the modal upon successful update
+      
     } catch (error) {
       console.error("Error updating user:", error);
       alert("There was an error updating the user. Please try again.");
     }
+   
   };
 
   // Open the edit modal with the user's current details
