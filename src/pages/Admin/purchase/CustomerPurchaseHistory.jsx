@@ -36,40 +36,60 @@ const CustomerPurchaseHistory = () => {
     const handleClickedSetPaid = async (selected) => {
         try {
             console.log({ selected });
+    
             const updatedSelected = {
-              ...selected,
-              paymentstatus: !selected?.paymentstatus,
+                ...selected,
+                paymentstatus: !selected?.paymentstatus,
             };
             console.log({ updatedSelected });
-      
-            await fetch(
-              `http://localhost:5000/paymentCustomerPurchase/${selected._id}`,
-              {
-                method: "PUT",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify(updatedSelected),
-              }
-            ).then((res) => res.json())
-            .then((data) => {
-              console.log(data);
-              if (data.modifiedCount) {
-                toast.success(" Updated Successfully", {
-                  position: "top-right",
+    
+            const response = await fetch(
+                `http://localhost:5000/paymentCustomerPurchase/${selected._id}`,
+                {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(updatedSelected),
+                }
+            );
+    
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+    
+            const data = await response.json();
+            console.log(data);
+    
+            if (data.modifiedCount) {
+                toast.success("Updated Successfully", {
+                    position: "top-right",
                 });
-                navigate("/getcustomerpurchase");
-              }
+    
+                // Update local state to reflect the change
+                setUsers((prevPurchases) =>
+                    prevPurchases.map((purchase) =>
+                        purchase._id === selected._id
+                            ? { ...purchase, paymentstatus: updatedSelected.paymentstatus }
+                            : purchase
+                    )
+                );
+            } else {
+                toast.error("No changes were made", {
+                    position: "top-right",
+                });
+            }
+        } catch (error) {
+            console.error("Error updating payment status:", error);
+            toast.error("Failed to update payment status", {
+                position: "top-right",
             });
-
-            
-          
-            //fetchUsers(); // Reload users after update
-           // setIsBlockModalOpen(false);
-          } catch (error) {
-            console.error("Error blocking/unblocking user:", error);
-          }
+        }
+    
+        // Optionally navigate after the operation
+        navigate("/getcustomerpurchase");
     };
+    
 
     return (
         <div className="mt-14">
@@ -120,7 +140,7 @@ const CustomerPurchaseHistory = () => {
                                     Product
                                 </span>
                                 <span className='font-bold'>Product Name</span>  : {user.productname}<br></br>
-                                <span className='font-bold'>Category</span>  : {user.category}<br></br>
+                                <span className='font-bold'>Category</span>  : {user.categoryDetails[0].name}<br></br>
 
                             </td>
                             <td className="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">

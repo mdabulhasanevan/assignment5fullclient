@@ -42,7 +42,7 @@ const ProductListAdmin = () => {
             </button>
           </Link>
         </div>
-        <table className="border-collapse w-2/3 mx-auto">
+        <table className="border-collapse w-full mx-auto">
           <thead>
             <tr>
               <th className="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">
@@ -71,7 +71,7 @@ const ProductListAdmin = () => {
                     {" "}
                     name
                   </span>
-                  {user.category}
+                  {user.categoryName[0].name}
                 </td>
                 <td className="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
                   <span className="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">

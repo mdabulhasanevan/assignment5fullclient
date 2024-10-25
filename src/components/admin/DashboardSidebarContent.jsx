@@ -48,7 +48,7 @@ const DashboardSidebarContent = () => {
         </NavLink>
 
         <NavLink
-         to={`/getcustomerpurchaseself/${user.phone}`}
+         to={`/getcustomerpurchaseself/${user?.uid}`}
           className={({ isActive }) =>
             isActive ? "text-blue-600" : "text-gray-600 hover:text-blue-500"
           }

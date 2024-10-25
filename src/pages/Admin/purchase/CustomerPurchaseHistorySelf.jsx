@@ -5,7 +5,7 @@ import { MdPaid } from 'react-icons/md';
 import { Link, useLoaderData, useNavigate } from 'react-router-dom';
 
 const CustomerPurchaseHistorySelf = () => {
-    
+
     const navigate = useNavigate();
 
     const loadedUsers = useLoaderData();
@@ -34,38 +34,38 @@ const CustomerPurchaseHistorySelf = () => {
         try {
             console.log({ selected });
             const updatedSelected = {
-              ...selected,
-              paymentstatus: !selected?.paymentstatus,
+                ...selected,
+                paymentstatus: !selected?.paymentstatus,
             };
             console.log({ updatedSelected });
-      
-            await fetch(
-              `http://localhost:5000/paymentCustomerPurchase/${selected._id}`,
-              {
-                method: "PUT",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify(updatedSelected),
-              }
-            ).then((res) => res.json())
-            .then((data) => {
-              console.log(data);
-              if (data.modifiedCount) {
-                toast.success(" Updated Successfully", {
-                  position: "top-right",
-                });
-                navigate("/getcustomerpurchase");
-              }
-            });
 
-            
-          
+            await fetch(
+                `http://localhost:5000/paymentCustomerPurchase/${selected._id}`,
+                {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(updatedSelected),
+                }
+            ).then((res) => res.json())
+                .then((data) => {
+                    console.log(data);
+                    if (data.modifiedCount) {
+                        toast.success(" Updated Successfully", {
+                            position: "top-right",
+                        });
+                        navigate("/getcustomerpurchase");
+                    }
+                });
+
+
+
             //fetchUsers(); // Reload users after update
-           // setIsBlockModalOpen(false);
-          } catch (error) {
+            // setIsBlockModalOpen(false);
+        } catch (error) {
             console.error("Error blocking/unblocking user:", error);
-          }
+        }
     };
 
     return (
@@ -117,7 +117,7 @@ const CustomerPurchaseHistorySelf = () => {
                                     Product
                                 </span>
                                 <span className='font-bold'>Product Name</span>  : {user.productname}<br></br>
-                                <span className='font-bold'>Category</span>  : {user.category}<br></br>
+                                <span className='font-bold'>Category</span>  : {user.categoryDetails[0].name}<br></br>
 
                             </td>
                             <td className="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
@@ -152,21 +152,24 @@ const CustomerPurchaseHistorySelf = () => {
                                 <span className="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">
                                     Actions
                                 </span>
-                                <button
+                                {/* <button
                                     onClick={() => handleClickedSetPaid(user)}
                                     className={`p-2 rounded-full bg-green-500 text-white `}
                                     title="Paid"
 
                                 >
                                     <MdPaid />
-                                </button>
+                                </button> */}
                                 &nbsp;&nbsp;&nbsp;
-                                <button
-                                    onClick={() => handleDelete(user._id)}
-                                    className="p-2 rounded-full bg-rose-300 hover:bg-orange-700 text-white "
-                                >
-                                    <IoMdRemoveCircle />
-                                </button>
+                                {
+                                    !user?.paymentstatus &&(
+                                    <button
+                                        onClick={() => handleDelete(user._id)}
+                                        className="p-2 rounded-full bg-rose-300 hover:bg-orange-700 text-white "
+                                    >
+                                        <IoMdRemoveCircle />
+                                    </button>
+                                )}
                             </td>
                         </tr>
                     ))}

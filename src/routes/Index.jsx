@@ -173,7 +173,8 @@ const router = createBrowserRouter([
                         <CustomerPurchaseHistorySelf />
                     </PrivateRoute>
                 ),
-                loader: ({ params }) => (fetch(`http://localhost:5000/CustomerPurchaseHistorySelf/${params.id}`)),
+                loader: ({ params }) => fetch(`http://localhost:5000/CustomerPurchaseHistorySelf/${params.id}`)
+                
             },
 
             //product router

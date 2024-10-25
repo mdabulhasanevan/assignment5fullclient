@@ -42,7 +42,7 @@ const CategoryList = () => {
             </button>
           </Link>
         </div>
-        <table className="border-collapse w-2/3 mx-auto">
+        <table className="border-collapse w-full mx-auto">
           <thead>
             <tr>
               <th className="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">

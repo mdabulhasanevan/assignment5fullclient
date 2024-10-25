@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { Link, useLoaderData, useNavigate } from 'react-router-dom';
+import Dropdown from '../../../components/admin/Dropdown';
 
 const EditProduct = () => {
   const loadedUser = useLoaderData();
 
   const [category, setCategory] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState(loadedUser.category);
 
   useEffect(() => {
     fetch('http://localhost:5000/getcategory') // Replace with your API URL
@@ -24,7 +26,7 @@ const EditProduct = () => {
       });
   }, []);
 
- // const [selectedCategory, setSelectedCategory] = useState(category?.name || "");
+  // const [selectedCategory, setSelectedCategory] = useState(category?.name || "");
 
 
   //console.log(loadedUser);
@@ -42,9 +44,10 @@ const EditProduct = () => {
     const rating = form.get("rating");
     const price = form.get("price");
 
-    const updatedUser = { category, name, photo, discription, rating, price  };
+    const updatedUser = { category, name, photo, discription, rating, price };
     console.log("UpdatedUser:", updatedUser);
 
+    
     fetch(`http://localhost:5000/productedit/${loadedUser._id}`, {
       method: "PUT",
       headers: {
@@ -92,13 +95,14 @@ const EditProduct = () => {
           </div>
 
           <div className="md:w-1/3">
-            
+
 
             <select className="bg-gray-200 appearance-none border-2 border-gray-200 rounded-none w-full py-2 px-4 text-gray-700 
                   leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
               id="category"
               type="text"
-              name="category"  
+              name="category"
+              value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}>
               <option value="">Select</option>
               {category.map((category) => (
@@ -135,14 +139,14 @@ const EditProduct = () => {
           </div>
         </div>
 
-        
+
         <div className="md:flex md:items-center mb-6">
           <div className="md:w-1/3">
             <label
               className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
               htmlFor="name"
             >
-               discription
+              discription
             </label>
           </div>
           <div className="md:w-1/3">
@@ -163,7 +167,7 @@ const EditProduct = () => {
               className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
               htmlFor="name"
             >
-               Price
+              Price
             </label>
           </div>
           <div className="md:w-1/3">
@@ -184,7 +188,7 @@ const EditProduct = () => {
               className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
               htmlFor="name"
             >
-               Rating
+              Rating
             </label>
           </div>
           <div className="md:w-1/3">
