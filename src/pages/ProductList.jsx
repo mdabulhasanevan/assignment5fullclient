@@ -27,10 +27,13 @@ const ProductList = () => {
                                         {ProductList.name}
                                         <div className="badge badge-secondary"> {ProductList.rating}</div>
                                     </h2>
-                                    <p>Price:  {ProductList.price}-<br></br> Description: {ProductList.discription}</p>
+                                    <p>Price:  {ProductList.price}-<br></br> </p>
+                                    {/* Description: {ProductList.discription}</p> */}
                                     <div className="card-actions justify-end">
                                         <div className="badge badge-outline"> {ProductList.price}/- BDT</div>
-                                        <div className="badge badge-outline"> {ProductList.categoryName[0].name}</div>
+                                        <div className="badge badge-outline"> 
+                                        {ProductList.categoryTable[0].name}
+                                        </div>
                                     </div>
                                     <div className="card-actions justify-end">
                                         <Link to={`/productdetails/${ProductList._id}`}><button className="btn btn-sm btn-primary">View Products</button> </Link>
