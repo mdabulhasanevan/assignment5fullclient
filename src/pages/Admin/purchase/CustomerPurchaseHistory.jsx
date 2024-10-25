@@ -15,6 +15,9 @@ const CustomerPurchaseHistory = () => {
     const [users, setUsers] = useState(loadedUsers);
     console.log(loadedUsers);
 
+    const TotalAmount = users.reduce((acc, user) => acc + (user.price * user.quantity), 0);
+
+
     const handleDelete = (_id) => {
         console.log(_id);
         fetch(`http://localhost:5000/deleteCustomerPurchase/${_id}`, {
@@ -108,6 +111,7 @@ const CustomerPurchaseHistory = () => {
                 </Link>
             </div>
             <table className="border-collapse w-3/3 mx-auto">
+            <caption> <b>Totlal Amount :  ${TotalAmount}/-</b></caption>
                 <thead>
                     <tr>
                         <th className="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">

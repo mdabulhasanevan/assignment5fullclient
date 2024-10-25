@@ -12,6 +12,9 @@ const CustomerPurchaseHistorySelf = () => {
     const [users, setUsers] = useState(loadedUsers);
     console.log(loadedUsers);
 
+    const TotalAmount = users.reduce((acc, user) => acc + (user.price * user.quantity), 0);
+
+
     const handleDelete = (_id) => {
         console.log(_id);
         fetch(`http://localhost:5000/deleteCustomerPurchase/${_id}`, {
@@ -30,43 +33,43 @@ const CustomerPurchaseHistorySelf = () => {
             });
     };
 
-    const handleClickedSetPaid = async (selected) => {
-        try {
-            console.log({ selected });
-            const updatedSelected = {
-                ...selected,
-                paymentstatus: !selected?.paymentstatus,
-            };
-            console.log({ updatedSelected });
+    // const handleClickedSetPaid = async (selected) => {
+    //     try {
+    //         console.log({ selected });
+    //         const updatedSelected = {
+    //             ...selected,
+    //             paymentstatus: !selected?.paymentstatus,
+    //         };
+    //         console.log({ updatedSelected });
 
-            await fetch(
-                `http://localhost:5000/paymentCustomerPurchase/${selected._id}`,
-                {
-                    method: "PUT",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(updatedSelected),
-                }
-            ).then((res) => res.json())
-                .then((data) => {
-                    console.log(data);
-                    if (data.modifiedCount) {
-                        toast.success(" Updated Successfully", {
-                            position: "top-right",
-                        });
-                        navigate("/getcustomerpurchase");
-                    }
-                });
+    //         await fetch(
+    //             `http://localhost:5000/paymentCustomerPurchase/${selected._id}`,
+    //             {
+    //                 method: "PUT",
+    //                 headers: {
+    //                     "Content-Type": "application/json",
+    //                 },
+    //                 body: JSON.stringify(updatedSelected),
+    //             }
+    //         ).then((res) => res.json())
+    //             .then((data) => {
+    //                 console.log(data);
+    //                 if (data.modifiedCount) {
+    //                     toast.success(" Updated Successfully", {
+    //                         position: "top-right",
+    //                     });
+    //                     navigate("/getcustomerpurchase");
+    //                 }
+    //             });
 
 
 
-            //fetchUsers(); // Reload users after update
-            // setIsBlockModalOpen(false);
-        } catch (error) {
-            console.error("Error blocking/unblocking user:", error);
-        }
-    };
+    //         //fetchUsers(); // Reload users after update
+    //         // setIsBlockModalOpen(false);
+    //     } catch (error) {
+    //         console.error("Error blocking/unblocking user:", error);
+    //     }
+    // };
 
     return (
         <div className="mt-14">
@@ -85,7 +88,9 @@ const CustomerPurchaseHistorySelf = () => {
                 </Link>
             </div>
             <table className="border-collapse w-3/3 mx-auto">
+            <caption> <b>Totlal Amount You have to be paid:  ${TotalAmount}/-</b></caption>
                 <thead>
+                   
                     <tr>
                         <th className="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">
                             Product
@@ -107,7 +112,11 @@ const CustomerPurchaseHistorySelf = () => {
                 </thead>
                 <tbody>
                     {users.map((user) => (
+
+                        
+
                         <tr
+                        
                             key={user._id}
                             className="bg-white lg:hover:bg-gray-100 flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0"
                         >
@@ -152,14 +161,14 @@ const CustomerPurchaseHistorySelf = () => {
                                 <span className="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">
                                     Actions
                                 </span>
-                                {/* <button
+                                <button
                                     onClick={() => handleClickedSetPaid(user)}
                                     className={`p-2 rounded-full bg-green-500 text-white `}
                                     title="Paid"
 
                                 >
                                     <MdPaid />
-                                </button> */}
+                                </button>
                                 &nbsp;&nbsp;&nbsp;
                                 {
                                     !user?.paymentstatus &&(

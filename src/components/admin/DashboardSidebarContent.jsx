@@ -74,7 +74,7 @@ const DashboardSidebarContent = () => {
                   <FaUsers className="inline mr-2" />
                   All Users
                 </NavLink>
-                <NavLink
+                {/* <NavLink
                   to="/createMessage"
                   className={({ isActive }) =>
                     isActive
@@ -84,7 +84,7 @@ const DashboardSidebarContent = () => {
                 >
                   <FaPenAlt className="inline mr-2" />
                   Create Message
-                </NavLink>
+                </NavLink> */}
               </>
             )}
             {/* User Links */}
