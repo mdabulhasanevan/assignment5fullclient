@@ -29,8 +29,8 @@ const ProductList = () => {
                                     </h2>
                                     <p>Price:  {ProductList.price}-<br></br> Description: {ProductList.discription}</p>
                                     <div className="card-actions justify-end">
-                                        <div className="badge badge-outline"> {ProductList.price}</div>
-                                        <div className="badge badge-outline"> {ProductList.category}</div>
+                                        <div className="badge badge-outline"> {ProductList.price}/- BDT</div>
+                                        <div className="badge badge-outline"> {ProductList.categoryName[0].name}</div>
                                     </div>
                                     <div className="card-actions justify-end">
                                         <Link to={`/productdetails/${ProductList._id}`}><button className="btn btn-sm btn-primary">View Products</button> </Link>

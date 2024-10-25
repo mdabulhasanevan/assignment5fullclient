@@ -8,9 +8,9 @@ const Footer = () => {
                 <nav>
                     <h6 className="footer-title">Services</h6>
                     
-                    <a className="link link-hover">Design</a>
-                    <a className="link link-hover">Marketing</a>
-                    <a className="link link-hover">Advertisement</a>
+                    <Link to="/category" target="_blank" rel="noopener noreferrer"  className="link link-hover">Category</Link>
+                    <Link to="/product" target="_blank" rel="noopener noreferrer"  className="link link-hover">Product</Link>
+                    <Link to="/register" target="_blank" rel="noopener noreferrer"  className="link link-hover">Create Account</Link>
                 </nav>
                 <nav>
                     <h6 className="footer-title">Company</h6>

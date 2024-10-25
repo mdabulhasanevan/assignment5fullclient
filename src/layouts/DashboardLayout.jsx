@@ -7,7 +7,7 @@ import DashboardSidebarContent from "../components/admin/DashboardSidebarContent
 const DashboardLayout = () => {
     return (
         <>
-        <div>
+        <div className="w-3/4 mx-auto">
           <div className="shadow-md bg-slate-100">
             <AdminNavber />
           </div>

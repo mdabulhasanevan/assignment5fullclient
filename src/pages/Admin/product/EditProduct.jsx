@@ -63,8 +63,11 @@ const EditProduct = () => {
             position: "top-right",
           });
           navigate("/productlistadmin");
+         // setCategory(updatedUser);
+
         }
       });
+     
   };
   return (
     <div className="mx-auto mt-20">

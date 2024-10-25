@@ -100,16 +100,12 @@ const ProductDetails = () => {
                         
 
                     </div>
-                    <div >
-                       
+                    
+                </div>
 
-
-                        <div className="card-actions justify-end">
+                <div className="card-actions justify-center mb-5">
                             <button className="btn btn-primary" onClick={() => document.getElementById('my_modal_3').showModal()}>Buy Now</button>
                         </div>
-
-                    </div>
-                </div>
 
             </div>
 

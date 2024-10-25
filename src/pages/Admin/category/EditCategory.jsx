@@ -83,7 +83,7 @@ const EditCategory = () => {
           </div>
         </div>
 
-        <div className="md:flex md:items-center mb-6">
+        {/* <div className="md:flex md:items-center mb-6">
           <div className="md:w-1/3">
             <label
               className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
@@ -144,7 +144,7 @@ const EditCategory = () => {
               defaultValue={loadedUser.rating}
             />
           </div>
-        </div>
+        </div> */}
 
         <div className="md:flex md:items-center mb-6">
           <div className="md:w-1/3">
@@ -152,7 +152,7 @@ const EditCategory = () => {
               className="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
               htmlFor="photo"
             >
-              E-mail
+             Photo
             </label>
           </div>
           <div className="md:w-1/3">
