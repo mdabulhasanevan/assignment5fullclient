@@ -16,7 +16,9 @@ const ProductList = () => {
                     {
                         ProductLists.map((ProductList) => (
 
-                            <div key={ProductList._id} className="card bg-base-100 shadow-xl">
+                            <div key={ProductList._id} className="card bg-base-100 shadow-xl
+                             transition transform hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:transform-none ...
+                            ">
                                 <figure>
                                     <img className="w-screen h-60"
                                         src={ProductList.photo}
@@ -30,7 +32,7 @@ const ProductList = () => {
                                     <p>Price:  {ProductList.price}-<br></br> </p>
                                     {/* Description: {ProductList.discription}</p> */}
                                     <div className="card-actions justify-end">
-                                        <div className="badge badge-outline"> {ProductList.price}/- BDT</div>
+                                        <div className="badge badge-outline"> 10%/- Less</div>
                                         <div className="badge badge-outline"> 
                                         {ProductList.categoryTable[0].name}
                                         </div>

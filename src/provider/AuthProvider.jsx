@@ -8,6 +8,7 @@ import {
 } from "firebase/auth";
 import app from "../../public/firebase/firebase.config";
 import { useNavigate } from "react-router-dom";
+import configURL from "../configURL";
 
 export const AuthContextLogin = createContext(null);
 

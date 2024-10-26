@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet";
+import { MdFiberNew } from "react-icons/md";
 import { Link, useLoaderData } from "react-router-dom";
 
 
@@ -16,11 +17,13 @@ const Categories  = () => {
                     {
                         Categories.map((Category) => (
 
-                            <div key={Category._id} className="card bg-base-100 shadow-xl">
+                            <div key={Category._id} className="card bg-base-100 shadow-xl
+                            transition transform hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:transform-none ...">
                                 <figure>
-                                    <img className="w-screen h-60"
+                                    <img className="w-screen h-60 relative"
                                         src={Category.photo}
                                         alt="Shoes" />
+                                        <MdFiberNew className="text-blue-400 absolute top-0 right-0 w-10 h-10" />
                                 </figure>
                                 <div className="card-body">
                                     <h2 className="card-title">

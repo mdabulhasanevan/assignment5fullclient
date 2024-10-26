@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { AuthContextLogin } from "../provider/AuthProvider";
+import { RiDashboardHorizontalFill } from "react-icons/ri";
 
 
 const Navbar = () => {
@@ -39,8 +40,8 @@ const Navbar = () => {
               {/* <li><Link to="/about">about</Link></li> */}
             </ul>
           </div>
-          <Link to="/" className="btn bg-white hover:bg-white text-xl">BuyMe
-          <img src="\src\assets\logo.jpg" className="hidden sm:block w-14"/>
+          <Link to="/" className="btn bg-white hover:bg-white text-xl">BuyMe 
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCuE2D3mnR3f-eo3zVbiFXBxRR6Rb_RX7f9E3_XPnJg5EbY1Dj6yDuKbi2csJpFKtGoFM&usqp=CAU" className="hidden sm:block w-10 pb-2"/>
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
@@ -58,9 +59,10 @@ const Navbar = () => {
                 {/* <img src={`${user?.photoURL}`} /> */}
                 
                 {/* <img src={user?.photoURL} className="w-7 rounded-full " /> */}
-                <Link to="/dashboard"> 
+                <Link to="/dashboard" className="flex justify-center items-center text-center"> 
                 {/* <span>{user?.displayName}</span> */}
-                <span>Dashboard</span>
+                {/* <span>Dashboard</span> */}
+                <span><RiDashboardHorizontalFill className="w-10 h-10 text-blue-500" /></span>
                 </Link>
                 {/* <button onClick={handleLogout} className="btn">Logout </button> */}
               </div>
