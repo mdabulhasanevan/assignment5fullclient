@@ -63,7 +63,7 @@ const ProductListAdmin = () => {
           <tbody>
             {users.map((user) => (
               <tr
-                key={user._id}
+                key={user?._id}
                 className="bg-white lg:hover:bg-gray-100 flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0"
               >
                 <td className="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
@@ -71,30 +71,30 @@ const ProductListAdmin = () => {
                     {" "}
                     name
                   </span>
-                  {user.categoryTable[0].name}
+                  {user?.categoryTable[0].name}
                 </td>
                 <td className="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
                   <span className="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">
                     {" "}
                     category
                   </span>
-                  {user.name}
+                  {user?.name}
                 </td>
                 <td className="w-full lg:w-auto p-3 text-gray-800 border border-b text-center block lg:table-cell relative lg:static">
                   <span className="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">
                     {" "}
                     photo
                   </span>
-                 <span className='font-bold'>Rating:</span>  {user.rating} <br></br>
-                 <span className='font-bold'>Price: </span>  {user.price} <br></br>
-                 <span className='font-bold'>description:</span>   {user.discription} <br></br>
+                 <span className='font-bold'>Rating:</span>  {user?.rating} <br></br>
+                 <span className='font-bold'>Price: </span>  {user?.price} <br></br>
+                 <span className='font-bold'>description:</span>   {user?.discription} <br></br>
                 </td>
   
                 <td className="w-full lg:w-auto p-3 text-gray-800 border border-b text-center block lg:table-cell relative lg:static">
                   <span className="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">
                     Actions
                   </span>
-                  <Link to={`/editproduct/${user._id}`}>
+                  <Link to={`/editproduct/${user?._id}`}>
                     <button
                       className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 
             border border-blue-500 hover:border-transparent rounded-none"
@@ -104,7 +104,7 @@ const ProductListAdmin = () => {
                   </Link>
                   &nbsp;&nbsp;&nbsp;
                   <button
-                    onClick={() => handleDelete(user._id)}
+                    onClick={() => handleDelete(user?._id)}
                     className="bg-red-500 hover:bg-orange-700 text-white font-semibold py-2 px-4 
             border border-blue-500 hover:border-transparent rounded-none"
                   >

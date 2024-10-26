@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { AuthContextLogin } from './../provider/AuthProvider';
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate  } from "react-router-dom";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 //import { getAuth, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 //import app from "../../public/firebase/firebase.config";
@@ -8,6 +8,8 @@ import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
 const Login = () => {const { loginWithEmail } = useContext(AuthContextLogin);
 const navigate = useNavigate();
+
+
 const [email, setEmail] = useState("");
 const [password, setPassword] = useState("");
 const [showPassword, setShowPassword] = useState(false);

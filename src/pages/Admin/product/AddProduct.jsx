@@ -6,7 +6,8 @@ import { Link, useLoaderData } from "react-router-dom";
 const AddProduct = () => {
 
   const loadeCategory = useLoaderData();
-  const handleAddData = (event) => {
+
+  const handleAddData = async (event) => {
     event.preventDefault();
 
     const form = new FormData(event.currentTarget);
@@ -18,15 +19,29 @@ const AddProduct = () => {
     const rating = form.get("rating");
     const price = form.get("price");
 
-    const user = { name, photo, category, description, rating,price };
-    console.log(user);
+    const data = new FormData()
+    data.append("image", photo)
+
+    let product = {};
+
+   await fetch("https://api.imgbb.com/1/upload?key=a8a4820aece8b6506e8f58f65088e3a7",
+      {
+        method: "POST", body: data
+      })
+      .then(response => response.json())
+      .then(data => {
+        product = { name, photo: data.data.url, category, description, rating, price };
+        console.log(product);
+      })
+
+
 
     fetch("http://localhost:5000/addproduct", {
       method: "POST",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify(user),
+      body: JSON.stringify(product),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -177,7 +192,7 @@ const AddProduct = () => {
                 className="bg-gray-200 appearance-none border-2 border-gray-200 rounded-none w-full py-2 px-4 text-gray-700 
                   leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                 id="photo"
-                type="url"
+                type="file"
                 name="photo"
                 placeholder=""
               />

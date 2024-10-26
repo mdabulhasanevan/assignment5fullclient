@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 
 const AddCategory = () => {
-    const handleAddUser = (event) => {
+    const handleAddUser = async (event) => {
         event.preventDefault();
     
         const form = new FormData(event.currentTarget);
@@ -14,13 +14,29 @@ const AddCategory = () => {
     
         const user = { name, photo };
         console.log(user);
+
+        const data = new FormData()
+        data.append("image", photo)
+    
+        let category = {};
+    
+       await fetch("https://api.imgbb.com/1/upload?key=a8a4820aece8b6506e8f58f65088e3a7",
+          {
+            method: "POST", body: data
+          })
+          .then(response => response.json())
+          .then(data => {
+            category = { name, photo: data.data.url,};
+            console.log(category);
+          })
+    
     
         fetch("http://localhost:5000/addcategory", {
           method: "POST",
           headers: {
             "content-type": "application/json",
           },
-          body: JSON.stringify(user),
+          body: JSON.stringify(category),
         })
           .then((res) => res.json())
           .then((data) => {
@@ -84,7 +100,7 @@ const AddCategory = () => {
                     className="bg-gray-200 appearance-none border-2 border-gray-200 rounded-none w-full py-2 px-4 text-gray-700 
                   leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                     id="photo"
-                    type="url"
+                    type="file"
                     name="photo"
                     placeholder=""
                   />

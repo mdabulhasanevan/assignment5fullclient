@@ -38,8 +38,8 @@ import React from 'react'
 
 
 const router = createBrowserRouter([
-   
-    
+
+
     {
         path: "/",
         element: <PublicLayout />,
@@ -58,7 +58,10 @@ const router = createBrowserRouter([
             },
             {
                 path: "/productdetails/:id",
-                element: <ProductDetails />,
+                element: (
+                    <PrivateRoute>
+                        <ProductDetails />
+                    </PrivateRoute>),
                 loader: ({ params }) => fetch(`http://localhost:5000/productdetail/${params.id}`),
 
             },
@@ -166,7 +169,7 @@ const router = createBrowserRouter([
                 loader: () => fetch(`http://localhost:5000/getCustomerPurchase`),
             },
             {
-               
+
                 path: "/getcustomerpurchaseself/:id",
                 element: (
                     <PrivateRoute>
@@ -174,7 +177,7 @@ const router = createBrowserRouter([
                     </PrivateRoute>
                 ),
                 loader: ({ params }) => fetch(`http://localhost:5000/CustomerPurchaseHistorySelf/${params.id}`)
-                
+
             },
 
             //product router
