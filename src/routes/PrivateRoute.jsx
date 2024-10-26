@@ -1,6 +1,6 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import {  AuthContextLogin } from "../provider/AuthProvider";
-import {   useNavigate } from "react-router-dom";
+import {   useLocation, useNavigate } from "react-router-dom";
 
 const PrivateRoute = ({ children }) => {
   
@@ -8,13 +8,17 @@ const PrivateRoute = ({ children }) => {
    // const location = useLocation();
 
    const navigate=useNavigate();
+   const location = useLocation();
   
-    if (user) {
-      return children;
+   useEffect(() => {
+    if (!user) {
+        // Redirect to login page and pass the original location to return after login
+        navigate("/login", { state: { from: location } });
     }
-  
-    // Redirect to login page and pass the original location to return after login
-    return  navigate("/login");
+}, [user, navigate, location]);
+
+// If user is authenticated, render the children
+return user ? children : null;
   
 };
 

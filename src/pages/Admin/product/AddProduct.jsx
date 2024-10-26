@@ -1,5 +1,7 @@
+import { Helmet } from "react-helmet";
 import toast from "react-hot-toast";
 import { Link, useLoaderData } from "react-router-dom";
+import configURL from "../../../configURL";
 
 
 
@@ -36,7 +38,7 @@ const AddProduct = () => {
 
 
 
-    fetch("http://localhost:5000/addproduct", {
+    fetch(`${configURL.baseUrl}/addproduct`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -56,6 +58,11 @@ const AddProduct = () => {
   };
   return (
     <>
+    <div>
+         <Helmet>
+                <title>Add Product</title>
+            </Helmet>
+      </div>
       <div className="mx-auto mt-20">
         <div className="flex justify-center justify-items-center">
           <h1 className="text-3xl font-bold text-center mb-10">

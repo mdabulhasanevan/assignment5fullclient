@@ -41,7 +41,7 @@ const AuthProvider = ({ children }) => {
 
       // Send user data to backend
       const response = await fetch(
-        "http://localhost:5000/users",
+        "${configURL.baseUrl}/users",
         {
           method: "POST",
           headers: {
@@ -85,7 +85,7 @@ const AuthProvider = ({ children }) => {
       if (currentUser) {
         try {
           const res = await fetch(
-            `http://localhost:5000/user/${currentUser.uid}`
+            `${configURL.baseUrl}/user/${currentUser.uid}`
           );
 
           if (!res.ok) {

@@ -2,11 +2,13 @@ import { useContext, useState } from "react";
 import { Link, Navigate, useLoaderData, useNavigate } from "react-router-dom";
 import { AuthContextLogin } from "../provider/AuthProvider";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet";
+import configURL from "../configURL";
 
 
 const ProductDetails = () => {
     const Navigate = useNavigate();
-    
+
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
     const productDetails = useLoaderData();
@@ -16,7 +18,7 @@ const ProductDetails = () => {
     const { user } = useContext(AuthContextLogin);
     //const { title, image_url, rating, details, category_id } = productDetails;
 
-    
+
     function handleCustomerPurchase(event) {
         event.preventDefault();
 
@@ -43,7 +45,7 @@ const ProductDetails = () => {
         const purchase = { productname, paymentstatus, productid, category, mobile, customer, email, customerid, isgift, address, price, quantity };
         console.log(purchase);
 
-        fetch("http://localhost:5000/addCustomerPurchase", {
+        fetch(`${configURL.baseUrl}/addCustomerPurchase`, {
             method: "POST",
             headers: {
                 "content-type": "application/json",
@@ -65,7 +67,17 @@ const ProductDetails = () => {
     }
 
     return (
+
         <div>
+
+            <div>
+                <Helmet>
+                    <title>  Pdoduct Details</title>
+                </Helmet>
+            </div>
+
+
+
             <div className="card bg-base-100  shadow-xl">
                 <figure className=''>
                     <img className=' '

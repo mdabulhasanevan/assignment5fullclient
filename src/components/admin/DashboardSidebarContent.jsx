@@ -88,19 +88,7 @@ const DashboardSidebarContent = () => {
               </>
             )}
             {/* User Links */}
-            {!user?.isAdmin && (
-              <NavLink
-                to="/messages"
-                className={({ isActive }) =>
-                  isActive
-                    ? "text-blue-600"
-                    : "text-gray-600 hover:text-blue-500"
-                }
-              >
-                <FaEnvelope className="inline mr-2" />
-                Messages
-              </NavLink>
-            )}
+       
           </>
         )}
         {/* Logout */}

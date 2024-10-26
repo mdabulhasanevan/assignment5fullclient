@@ -1,8 +1,17 @@
+import { Helmet } from "react-helmet";
 
 
 const Contact = () => {
     return (
         <div>
+
+
+            <div>
+                <Helmet>
+                    <title>  Contact Page</title>
+                </Helmet>
+            </div>
+
             <h1 className='font-bold text-center'>BuyMe.com </h1>
             <p className="p-10">
                 Upazila ICT Office, Nazirpur, Pirojpur <br></br>

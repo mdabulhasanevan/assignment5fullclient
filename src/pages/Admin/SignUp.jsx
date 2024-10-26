@@ -5,6 +5,7 @@ import { getAuth, createUserWithEmailAndPassword, updateProfile, onAuthStateChan
 import { useNavigate } from "react-router-dom";
 import app from "../../../public/firebase/firebase.config";
 import { useState } from "react";
+import { Helmet } from "react-helmet";
 
 const SingUp = () => {
     const auth = getAuth(app);
@@ -58,6 +59,15 @@ const SingUp = () => {
 
     return (
         <div id="singup">
+
+
+            <div>
+                <Helmet>
+                    <title> Registration Page</title>
+                </Helmet>
+            </div>
+
+
             <div className="singup">
                 <h2 className="text-center font-bold">Create an account!</h2>
                 <div className="card-body">
@@ -65,11 +75,11 @@ const SingUp = () => {
                         <input onChange={(e) => setName(e.target.value)} type="text" className="input input-bordered" required placeholder="Enter your name" />
                     </div>
                     <div className="form-control">
-                    <input onChange={(e) => setEmail(e.target.value)} type="email" className="input input-bordered" required placeholder="Enter your email" />
+                        <input onChange={(e) => setEmail(e.target.value)} type="email" className="input input-bordered" required placeholder="Enter your email" />
                     </div>
                     <div className="form-control">
-                    <input onChange={(e) => setPassword(e.target.value)} type="password" className="input input-bordered" required placeholder="Enter your password" />
-                    <p>{err}</p>
+                        <input onChange={(e) => setPassword(e.target.value)} type="password" className="input input-bordered" required placeholder="Enter your password" />
+                        <p>{err}</p>
                     </div>
                     <button onClick={handleSubmit} className="input input-bordered" required> Singup</button>
                 </div>

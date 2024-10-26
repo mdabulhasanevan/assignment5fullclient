@@ -8,9 +8,9 @@ const MessageDetails = () => {
   useEffect(() => {
     const fetchMessageDetails = async () => {
       try {
-        // const response = await fetch(`http://localhost:5000/messages/${id}`); // Adjust URL
+        // const response = await fetch(`${configURL.baseUrl}/messages/${id}`); // Adjust URL
         const response = await fetch(
-          `http://localhost:5000/messages/${id}`
+          `${configURL.baseUrl}/messages/${id}`
         ); // Adjust URL
         if (!response.ok) {
           throw new Error("Failed to fetch message details");

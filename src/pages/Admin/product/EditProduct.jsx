@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { Link, useLoaderData, useNavigate } from 'react-router-dom';
 import Dropdown from '../../../components/admin/Dropdown';
+import { Helmet } from 'react-helmet';
+import configURL from '../../../configURL';
 
 const EditProduct = () => {
   const loadedUser = useLoaderData();
@@ -10,7 +12,7 @@ const EditProduct = () => {
   const [selectedCategory, setSelectedCategory] = useState(loadedUser.category);
 
   useEffect(() => {
-    fetch('http://localhost:5000/getcategory') // Replace with your API URL
+    fetch(`${configURL.baseUrl}/getcategory`) // Replace with your API URL
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -47,8 +49,8 @@ const EditProduct = () => {
     const updatedUser = { category, name, photo, discription, rating, price };
     console.log("UpdatedUser:", updatedUser);
 
-    
-    fetch(`http://localhost:5000/productedit/${loadedUser._id}`, {
+
+    fetch(`${configURL.baseUrl}/productedit/${loadedUser._id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -63,14 +65,21 @@ const EditProduct = () => {
             position: "top-right",
           });
           navigate("/productlistadmin");
-         // setCategory(updatedUser);
+          // setCategory(updatedUser);
 
         }
       });
-     
+
   };
   return (
     <div className="mx-auto mt-20">
+
+      <div>
+        <Helmet>
+          <title>Edit Product</title>
+        </Helmet>
+      </div>
+
       <div className="flex justify-center justify-items-center">
         <h1 className="text-3xl font-bold text-center mb-10">
           Update Product :

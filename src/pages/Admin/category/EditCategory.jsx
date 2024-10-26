@@ -1,6 +1,8 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
 import toast from 'react-hot-toast';
 import { Link, useLoaderData, useNavigate } from 'react-router-dom';
+import configURL from '../../../configURL';
 
 const EditCategory = () => {
     const loadedUser = useLoaderData();
@@ -18,7 +20,7 @@ const EditCategory = () => {
     const updatedUser = { name, photo };
     console.log("UpdatedUser:", updatedUser);
 
-    fetch(`http://localhost:5000/categoryedit/${loadedUser._id}`, {
+    fetch(`${configURL.baseUrl}/categoryedit/${loadedUser._id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -38,6 +40,13 @@ const EditCategory = () => {
   };
   return (
     <div className="mx-auto mt-20">
+
+<div>
+         <Helmet>
+                <title>Edit Category</title>
+            </Helmet>
+      </div>
+
       <div className="flex justify-center justify-items-center">
         <h1 className="text-3xl font-bold text-center mb-10">
           Update Category :

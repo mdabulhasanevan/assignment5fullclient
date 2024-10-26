@@ -9,7 +9,7 @@ const ProductListCategoryWise = () => {
     return (
         <div>
              <Helmet>
-                <title>Product List</title>
+                <title>Product List Category Wise</title>
             </Helmet>
          <ProductList/>
         </div>

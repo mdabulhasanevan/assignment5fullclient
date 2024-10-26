@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { AuthContextLogin } from '../../provider/AuthProvider';
+import { Helmet } from 'react-helmet';
 
 const Dashboard = () => {
   const { user } = useContext(AuthContextLogin);
@@ -59,6 +60,15 @@ const Dashboard = () => {
 
   return (
     <div className="p-6 bg-white rounded-lg shadow-lg relative">
+
+
+      <div>
+        <Helmet>
+          <title>  Dashboard</title>
+        </Helmet>
+      </div>
+
+
       <div className="flex flex-col items-center">
         <img
           src={user?.photoUrl}

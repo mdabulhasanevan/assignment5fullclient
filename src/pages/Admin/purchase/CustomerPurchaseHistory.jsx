@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { Helmet } from "react-helmet";
 import toast from "react-hot-toast";
 import { ImBlocked } from "react-icons/im";
 import { IoMdRemoveCircle } from "react-icons/io";
 import { IoRemoveCircleSharp } from "react-icons/io5";
 import { MdPaid } from "react-icons/md";
 import { Link, useLoaderData, useNavigate } from "react-router-dom";
+import configURL from "../../../configURL";
 
 
 const CustomerPurchaseHistory = () => {
@@ -20,7 +22,7 @@ const CustomerPurchaseHistory = () => {
 
     const handleDelete = (_id) => {
         console.log(_id);
-        fetch(`http://localhost:5000/deleteCustomerPurchase/${_id}`, {
+        fetch(`${configURL.baseUrl}/deleteCustomerPurchase/${_id}`, {
             method: "DELETE",
         })
             .then((res) => res.json())
@@ -39,15 +41,15 @@ const CustomerPurchaseHistory = () => {
     const handleClickedSetPaid = async (selected) => {
         try {
             console.log({ selected });
-    
+
             const updatedSelected = {
                 ...selected,
                 paymentstatus: !selected?.paymentstatus,
             };
             console.log({ updatedSelected });
-    
+
             const response = await fetch(
-                `http://localhost:5000/paymentCustomerPurchase/${selected._id}`,
+                `${configURL.baseUrl}/paymentCustomerPurchase/${selected._id}`,
                 {
                     method: "PUT",
                     headers: {
@@ -56,19 +58,19 @@ const CustomerPurchaseHistory = () => {
                     body: JSON.stringify(updatedSelected),
                 }
             );
-    
+
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
-    
+
             const data = await response.json();
             console.log(data);
-    
+
             if (data.modifiedCount) {
                 toast.success("Updated Successfully", {
                     position: "top-right",
                 });
-    
+
                 // Update local state to reflect the change
                 setUsers((prevPurchases) =>
                     prevPurchases.map((purchase) =>
@@ -88,14 +90,21 @@ const CustomerPurchaseHistory = () => {
                 position: "top-right",
             });
         }
-    
+
         // Optionally navigate after the operation
         navigate("/getcustomerpurchase");
     };
-    
+
 
     return (
         <div className="mt-14">
+
+            <div>
+                <Helmet>
+                    <title>  Purchase History Self</title>
+                </Helmet>
+            </div>
+
             <div className="flex justify-center justify-items-center">
                 <h1 className="text-3xl font-bold text-center mb-10">
                     All Ordered List: {users.length}
@@ -111,7 +120,7 @@ const CustomerPurchaseHistory = () => {
                 </Link>
             </div>
             <table className="border-collapse w-3/3 mx-auto">
-            <caption> <b>Totlal Amount :  ${TotalAmount}/-</b></caption>
+                <caption> <b>Totlal Amount :  ${TotalAmount}/-</b></caption>
                 <thead>
                     <tr>
                         <th className="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">

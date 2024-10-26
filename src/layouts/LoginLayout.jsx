@@ -3,7 +3,7 @@ import Navbar from "../components/Navbar";
 
 const LoginLayout = () => {
     return (
-        <div>
+        <div className="w-3/4 mx-auto">
             <Navbar/>
             <Outlet/>
             

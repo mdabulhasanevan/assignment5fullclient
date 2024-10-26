@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
+import { Helmet } from "react-helmet";
 import { FaEdit, FaUserShield } from "react-icons/fa";
 import { ImBlocked } from "react-icons/im";
+import configURL from "../../configURL";
 
 const AllUsers = () => {
   const [users, setUsers] = useState([]);
@@ -20,7 +22,7 @@ const AllUsers = () => {
   const fetchUsers = async () => {
     try {
       const response = await fetch(
-        "http://localhost:5000/users"
+        `${configURL.baseUrl}/users`
       );
       const data = await response.json();
       setUsers(data);
@@ -44,7 +46,7 @@ const AllUsers = () => {
       console.log({ updatedUser });
 
       await fetch(
-        `http://localhost:5000/user/${selectedUser._id}`,
+        `${configURL.baseUrl}/user/${selectedUser._id}`,
         {
           method: "PUT",
           headers: {
@@ -67,7 +69,7 @@ const AllUsers = () => {
       const updatedUser = { ...selectedUser, isAdmin: !selectedUser?.isAdmin };
 
       await fetch(
-        `http://localhost:5000/user/${selectedUser._id}`,
+        `${configURL.baseUrl}/user/${selectedUser._id}`,
         {
           method: "PUT",
           headers: {
@@ -107,7 +109,7 @@ const AllUsers = () => {
       };
 
       await fetch(
-        `http://localhost:5000/user/${selectedUser._id}`,
+        `${configURL.baseUrl}/user/${selectedUser._id}`,
         {
           method: "PUT",
           headers: {
@@ -134,6 +136,15 @@ const AllUsers = () => {
 
   return (
     <div className="container mx-auto p-4">
+
+
+      <div>
+        <Helmet>
+          <title>  All User</title>
+        </Helmet>
+      </div>
+
+
       <h2 className="text-2xl font-bold mb-4">Users List</h2>
       <table className="min-w-full bg-white border">
         <thead>
@@ -169,13 +180,11 @@ const AllUsers = () => {
               <td className="py-2 px-4 border">
                 <button
                   onClick={() => handleClickedSetUserOrAdminRole(user)}
-                  className={`mr-2 p-2 rounded-full text-white ${
-                    user.isAdmin ? "bg-green-500" : "bg-blue-500"
-                  } ${
-                    user.email === "admin@gmail.com"
+                  className={`mr-2 p-2 rounded-full text-white ${user.isAdmin ? "bg-green-500" : "bg-blue-500"
+                    } ${user.email === "admin@gmail.com"
                       ? "opacity-50 cursor-not-allowed"
                       : ""
-                  }`}
+                    }`}
                   title="Toggle Admin/User"
                   disabled={user.email === "admin@gmail.com"}
                 >
@@ -191,11 +200,10 @@ const AllUsers = () => {
                 </button>
                 <button
                   onClick={() => handleClickedSetBlock(user)}
-                  className={`p-2 rounded-full bg-red-500 text-white ${
-                    user.email === "super-admin@dev-master.com"
+                  className={`p-2 rounded-full bg-red-500 text-white ${user.email === "super-admin@dev-master.com"
                       ? "opacity-50 cursor-not-allowed"
                       : ""
-                  }`}
+                    }`}
                   title="Block User"
                   disabled={user.email === "admin@gmail.com"}
                 >
@@ -283,9 +291,8 @@ const AllUsers = () => {
             </h3>
             <button
               onClick={handleBlock}
-              className={`bg-red-500 text-white px-4 py-2 rounded ${
-                selectedUser.isBlocked ? "bg-green-500" : "bg-red-500"
-              }`}
+              className={`bg-red-500 text-white px-4 py-2 rounded ${selectedUser.isBlocked ? "bg-green-500" : "bg-red-500"
+                }`}
             >
               {selectedUser.isBlocked ? "Unblock" : "Block"}
             </button>

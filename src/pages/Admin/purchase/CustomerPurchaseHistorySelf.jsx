@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { Helmet } from 'react-helmet';
 import toast from 'react-hot-toast';
 import { IoMdRemoveCircle } from 'react-icons/io';
 import { MdPaid } from 'react-icons/md';
 import { Link, useLoaderData, useNavigate } from 'react-router-dom';
+import configURL from '../../../configURL';
 
 const CustomerPurchaseHistorySelf = () => {
 
@@ -17,7 +19,7 @@ const CustomerPurchaseHistorySelf = () => {
 
     const handleDelete = (_id) => {
         console.log(_id);
-        fetch(`http://localhost:5000/deleteCustomerPurchase/${_id}`, {
+        fetch(`${configURL.baseUrl}/deleteCustomerPurchase/${_id}`, {
             method: "DELETE",
         })
             .then((res) => res.json())
@@ -43,7 +45,7 @@ const CustomerPurchaseHistorySelf = () => {
     //         console.log({ updatedSelected });
 
     //         await fetch(
-    //             `http://localhost:5000/paymentCustomerPurchase/${selected._id}`,
+    //             `${configURL.baseUrl}/paymentCustomerPurchase/${selected._id}`,
     //             {
     //                 method: "PUT",
     //                 headers: {
@@ -73,24 +75,26 @@ const CustomerPurchaseHistorySelf = () => {
 
     return (
         <div className="mt-14">
+
+
+            <div>
+                <Helmet>
+                    <title>  Purchase History Admin</title>
+                </Helmet>
+            </div>
+
+
             <div className="flex justify-center justify-items-center">
                 <h1 className="text-3xl font-bold text-center mb-10">
                     All Ordered List: {users.length}
                 </h1>
                 &nbsp;&nbsp;&nbsp;
-                <Link to="/addproduct">
-                    <button
-                        className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white 
-            py-2 px-4 border border-blue-500 hover:border-transparent rounded-tl-md rounded-br-md"
-                    >
-                        Add Product
-                    </button>
-                </Link>
+
             </div>
             <table className="border-collapse w-3/3 mx-auto">
-            <caption> <b>Totlal Amount You have to be paid:  ${TotalAmount}/-</b></caption>
+                <caption> <b>Totlal Amount You have to be paid:  ${TotalAmount}/-</b></caption>
                 <thead>
-                   
+
                     <tr>
                         <th className="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">
                             Product
@@ -113,10 +117,10 @@ const CustomerPurchaseHistorySelf = () => {
                 <tbody>
                     {users.map((user) => (
 
-                        
+
 
                         <tr
-                        
+
                             key={user._id}
                             className="bg-white lg:hover:bg-gray-100 flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0"
                         >
@@ -171,14 +175,14 @@ const CustomerPurchaseHistorySelf = () => {
                                 </button>
                                 &nbsp;&nbsp;&nbsp;
                                 {
-                                    !user?.paymentstatus &&(
-                                    <button
-                                        onClick={() => handleDelete(user._id)}
-                                        className="p-2 rounded-full bg-rose-300 hover:bg-orange-700 text-white "
-                                    >
-                                        <IoMdRemoveCircle />
-                                    </button>
-                                )}
+                                    !user?.paymentstatus && (
+                                        <button
+                                            onClick={() => handleDelete(user._id)}
+                                            className="p-2 rounded-full bg-rose-300 hover:bg-orange-700 text-white "
+                                        >
+                                            <IoMdRemoveCircle />
+                                        </button>
+                                    )}
                             </td>
                         </tr>
                     ))}

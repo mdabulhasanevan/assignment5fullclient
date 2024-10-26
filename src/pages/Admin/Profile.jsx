@@ -3,19 +3,20 @@ import { AuthContextLogin } from "../../provider/AuthProvider";
 import { FiEdit } from "react-icons/fi"; // Importing react-icon
 import toast from "react-hot-toast";
 import { Navigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const Profile = () => {
   const { user, setUser } = useContext(AuthContextLogin);
- // const { user } = useContext(AuthContextLogin);
+  // const { user } = useContext(AuthContextLogin);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  
+
   const [formData, setFormData] = useState({
     displayName: "",
     phone: "",
     photoURL: "",
     address: "",
   });
-console.log(user);
+  console.log(user);
   // Update user info
   const handleUpdate = async () => {
     try {
@@ -29,7 +30,7 @@ console.log(user);
 
       // Make API call to update user information
       const response = await fetch(
-        `http://localhost:5000/user/${user._id}`,
+        `${configURL.baseUrl}/user/${user._id}`,
         {
           method: "PUT",
           headers: {
@@ -37,26 +38,26 @@ console.log(user);
           },
           body: JSON.stringify(updatedUser),
         })
-        
-       
-         
+
+
+
       if (!response.ok) {
         throw new Error("Failed to update user information");
       }
       //const updatedUserData = await response.json();
       console.log(updatedUser);
       setUser(updatedUser); // Update user in the context
-      
+
       setIsEditModalOpen(false);
-     //
-    
+      //
+
       // Close the modal upon successful update
-      
+
     } catch (error) {
       console.error("Error updating user:", error);
       alert("There was an error updating the user. Please try again.");
     }
-   
+
   };
 
   // Open the edit modal with the user's current details
@@ -72,6 +73,15 @@ console.log(user);
 
   return (
     <div className="p-6 bg-white rounded-lg shadow-lg relative">
+
+
+      <div>
+        <Helmet>
+          <title>  Profile</title>
+        </Helmet>
+      </div>
+
+
       <div className="flex flex-col items-center">
         <img
           src={user?.photoUrl}

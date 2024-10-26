@@ -31,7 +31,7 @@ const AddCategory = () => {
           })
     
     
-        fetch("http://localhost:5000/addcategory", {
+        fetch(`${configURL.baseUrl}/addcategory`, {
           method: "POST",
           headers: {
             "content-type": "application/json",
@@ -51,6 +51,9 @@ const AddCategory = () => {
       };
       return (
         <>
+          <Helmet>
+                <title>Add Category</title>
+            </Helmet>
           <div className="mx-auto mt-20">
             <div className="flex justify-center justify-items-center">
               <h1 className="text-3xl font-bold text-center mb-10">

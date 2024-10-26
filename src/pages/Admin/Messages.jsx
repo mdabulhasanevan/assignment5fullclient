@@ -9,7 +9,7 @@ const Messages = () => {
   useEffect(() => {
     const fetchMessages = async () => {
       try {
-        // const response = await fetch("http://localhost:5000/messages");
+        // const response = await fetch("${configURL.baseUrl}/messages");
         const response = await fetch(
           "https://the-master-full-stack-project-server.vercel.app/messages"
         );

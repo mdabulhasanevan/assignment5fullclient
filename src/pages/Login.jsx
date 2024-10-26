@@ -1,99 +1,118 @@
 import { useContext, useState } from "react";
 import { AuthContextLogin } from './../provider/AuthProvider';
-import { Link, useNavigate  } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import { Helmet } from "react-helmet";
 //import { getAuth, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 //import app from "../../public/firebase/firebase.config";
 
 
-const Login = () => {const { loginWithEmail } = useContext(AuthContextLogin);
-const navigate = useNavigate();
+const Login = () => {
+  const { loginWithEmail } = useContext(AuthContextLogin);
+  const navigate = useNavigate();
+
+  const location = useLocation();
+  //const from = location.state?.from || '/'; // Default to home if no state is present
+  const from = location.state?.from?.pathname || '/'; // Redirect to target or home
 
 
-const [email, setEmail] = useState("");
-const [password, setPassword] = useState("");
-const [showPassword, setShowPassword] = useState(false);
-const [error, setError] = useState(null); // State to handle error messages
 
-const handleEmailLogin = async (e) => {
-  e.preventDefault();
-  setError(null); // Reset any previous errors
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState(null); // State to handle error messages
 
-  try {
-    await loginWithEmail(email, password); // Try to log in
-    navigate("/dashboard"); // If successful, navigate to dashboard
-  } catch (err) {
-    setError(err.message); // Set error message if login fails
-    console.error(err.message);
-  }
-};
+  const handleEmailLogin = async (e) => {
+    e.preventDefault();
+    setError(null); // Reset any previous errors
 
-return (
-  <div className="hero min-h-screen bg-white pt-10 font-semibold">
-    <div className="card w-full max-w-xl ">
-      <form className="card-body" onSubmit={handleEmailLogin}>
-        <h1 className="text-4xl font-extrabold text-center mb-4">
-          Please Login!
-        </h1>
+    try {
+      await loginWithEmail(email, password); // Try to log in
+      navigate(from, { replace: true });  // Redirect back to the original location
 
-        {/* Display error message */}
-        {error && <p className="text-red-500 text-center">{error}</p>}
 
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text">Email</span>
-          </label>
-          <input
-            type="email"
-            placeholder="Enter your email"
-            className="input input-bordered"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
+      //navigate("/dashboard"); // If successful, navigate to dashboard
+    } catch (err) {
+      setError(err.message); // Set error message if login fails
+      console.error(err.message);
+    }
+  };
 
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text">Password</span>
-          </label>
-          <div className="relative">
+  return (
+    <div className="hero min-h-screen bg-white pt-10 font-semibold">
+
+
+      <div>
+        <Helmet>
+          <title> Login</title>
+        </Helmet>
+      </div>
+
+
+      <div className="card w-full max-w-xl ">
+        <form className="card-body" onSubmit={handleEmailLogin}>
+          <h1 className="text-4xl font-extrabold text-center mb-4">
+            Please Login!
+          </h1>
+
+          {/* Display error message */}
+          {error && <p className="text-red-500 text-center">{error}</p>}
+
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Email</span>
+            </label>
             <input
-              type={showPassword ? "text" : "password"}
-              placeholder="Enter your password"
-              className="input input-bordered w-full pr-10"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              type="email"
+              placeholder="Enter your email"
+              className="input input-bordered"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
-            <span
-              className="absolute right-3 top-3 cursor-pointer"
-              onClick={() => setShowPassword(!showPassword)}
-            >
-              {showPassword ? <AiFillEyeInvisible /> : <AiFillEye />}
-            </span>
           </div>
-          <label className="label">
-            <Link to="#" className="label-text-alt link link-hover">
-              Forgot password?
+
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Password</span>
+            </label>
+            <div className="relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Enter your password"
+                className="input input-bordered w-full pr-10"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+              <span
+                className="absolute right-3 top-3 cursor-pointer"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? <AiFillEyeInvisible /> : <AiFillEye />}
+              </span>
+            </div>
+            <label className="label">
+              <Link to="#" className="label-text-alt link link-hover">
+                Forgot password?
+              </Link>
+            </label>
+          </div>
+
+          <div className="form-control mt-6">
+            <button className="btn bg-black text-white w-full">Login</button>
+          </div>
+
+          <p className="mt-4 text-center">
+            Don't have an account?{" "}
+            <Link to="/register" className="link">
+              Register here
             </Link>
-          </label>
-        </div>
-
-        <div className="form-control mt-6">
-          <button className="btn bg-black text-white w-full">Login</button>
-        </div>
-
-        <p className="mt-4 text-center">
-          Don't have an account?{" "}
-          <Link to="/register" className="link">
-            Register here
-          </Link>
-        </p>
-      </form>
+          </p>
+        </form>
+      </div>
     </div>
-  </div>
-);
+  );
 };
 
 export default Login;

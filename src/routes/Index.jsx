@@ -33,6 +33,8 @@ import { useContext } from 'react';
 
 
 import React from 'react'
+import configURL from '../configURL';
+
 
 
 
@@ -47,13 +49,13 @@ const router = createBrowserRouter([
             {
                 path: "/",
                 element: <Home />,
-                loader: () => fetch(`http://localhost:5000/getCategory`),
+                loader: () => fetch(`${configURL.baseUrl}/getCategory`),
 
             },
             {
                 path: "/product",
                 element: <ProductList />,
-                loader: () => fetch(`http://localhost:5000/getproduct`),
+                loader: () => fetch(`${configURL.baseUrl}/getproduct`),
 
             },
             {
@@ -62,20 +64,20 @@ const router = createBrowserRouter([
                     <PrivateRoute>
                         <ProductDetails />
                     </PrivateRoute>),
-                loader: ({ params }) => fetch(`http://localhost:5000/productdetail/${params.id}`),
+                loader: ({ params }) => fetch(`${configURL.baseUrl}/productdetail/${params.id}`),
 
             },
             {
                 path: "/category",
                 element: <Categories />,
-                loader: () => fetch(`http://localhost:5000/getCategory`),
+                loader: () => fetch(`${configURL.baseUrl}/getCategory`),
 
             },
             {
                 path: "/productlistbycategory/:id",
                 element: <ProductListCategoryWise />,
                 //loader: ({ params }) => fetch(`https://assignment-4-online-course-project-server-side.vercel.app/course/${params.id}`),
-                loader: ({ params }) => fetch(`http://localhost:5000/productlistbycategory/${params.id}`),
+                loader: ({ params }) => fetch(`${configURL.baseUrl}/productlistbycategory/${params.id}`),
 
             },
             {
@@ -119,7 +121,7 @@ const router = createBrowserRouter([
                         <CategoryList />
                     </PrivateRoute>
                 ),
-                loader: () => fetch(`http://localhost:5000/getcategory`),
+                loader: () => fetch(`${configURL.baseUrl}/getcategory`),
             },
             {
                 path: "/editcategory/:id",
@@ -128,7 +130,7 @@ const router = createBrowserRouter([
                         <EditCategory />
                     </PrivateRoute>
                 ),
-                loader: ({ params }) => fetch(`http://localhost:5000/categoryadmin/${params.id}`),
+                loader: ({ params }) => fetch(`${configURL.baseUrl}/categoryadmin/${params.id}`),
             },
 
             {
@@ -166,7 +168,7 @@ const router = createBrowserRouter([
                         <CustomerPurchaseHistory />
                     </PrivateRoute>
                 ),
-                loader: () => fetch(`http://localhost:5000/getCustomerPurchase`),
+                loader: () => fetch(`${configURL.baseUrl}/getCustomerPurchase`),
             },
             {
 
@@ -176,7 +178,7 @@ const router = createBrowserRouter([
                         <CustomerPurchaseHistorySelf />
                     </PrivateRoute>
                 ),
-                loader: ({ params }) => fetch(`http://localhost:5000/CustomerPurchaseHistorySelf/${params.id}`)
+                loader: ({ params }) => fetch(`${configURL.baseUrl}/CustomerPurchaseHistorySelf/${params.id}`)
 
             },
 
@@ -189,7 +191,7 @@ const router = createBrowserRouter([
                         <AddProduct />
                     </PrivateRoute>
                 ),
-                loader: () => fetch(`http://localhost:5000/getcategory`),
+                loader: () => fetch(`${configURL.baseUrl}/getcategory`),
             },
             {
                 path: "/productlistadmin",
@@ -198,7 +200,7 @@ const router = createBrowserRouter([
                         <ProductListAdmin />
                     </PrivateRoute>
                 ),
-                loader: () => fetch(`http://localhost:5000/getproduct`),
+                loader: () => fetch(`${configURL.baseUrl}/getproduct`),
             },
             {
                 path: "/editproduct/:id",
@@ -207,7 +209,7 @@ const router = createBrowserRouter([
                         <EditProduct />
                     </PrivateRoute>
                 ),
-                loader: ({ params }) => fetch(`http://localhost:5000/productadmin/${params.id}`)
+                loader: ({ params }) => fetch(`${configURL.baseUrl}/productadmin/${params.id}`)
             },
 
         ]
